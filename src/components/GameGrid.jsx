@@ -70,6 +70,21 @@ const GameGrid = () => {
       ) : (
         // Netflix-style Row View (The 'All' tab without active search)
         <div className="game-rows-container">
+          
+          {/* Popular Games Row */}
+          <div className="game-row-section animate-fade-in" style={{ marginBottom: '1rem' }}>
+            <div className="game-row-header">
+              <h3><span className="text-gradient">Most Popular</span> PC Games</h3>
+            </div>
+            <div className="game-row" style={{ paddingBottom: '2rem' }}>
+              {searchedGames.filter(g => g.isPopular).map(game => (
+                <div key={game.id} className="game-row-item" style={{ flex: '0 0 350px' }}>
+                  <GameCard game={game} />
+                </div>
+              ))}
+            </div>
+          </div>
+
           {categories.map(category => {
             const categoryGames = searchedGames.filter(g => g.category === category).slice(0, 10);
             if (categoryGames.length === 0) return null;

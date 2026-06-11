@@ -47,17 +47,23 @@ async function generateAllGames() {
       return 'Arcade';
     };
 
-    const hardcoreGames = ftgData.slice(0, 360).map(g => ({
-      id: g.id.toString(),
-      title: g.title,
-      description: (g.short_description || "").replace(/<\/?[^>]+(>|$)/g, "").substr(0, 150) + "...",
-      category: mapFtgCategory(g.genre, g.title),
-      coverUrl: g.thumbnail.replace('http:', 'https:'),
-      rating: Number((Math.random() * (5 - 3.8) + 3.8).toFixed(1)),
-      isWebGame: g.platform.includes('Web Browser') || Math.random() > 0.5,
-      gameUrl: "https://html5.gamedistribution.com/rvvASMiM6KXzbfYALxyBPd0raxZ6vd9SV/",
-      downloadUrl: g.game_url
-    }));
+    const popularTitles = ['overwatch 2', 'apex legends', 'pubg', 'world of warcraft', 'genshin impact', 'valorant', 'lost ark', 'smite', 'warframe', 'destiny 2', 'path of exile', 'halo infinite'];
+
+    const hardcoreGames = ftgData.slice(0, 360).map(g => {
+      const isPop = popularTitles.some(pt => g.title.toLowerCase().includes(pt));
+      return {
+        id: g.id.toString(),
+        title: g.title,
+        description: (g.short_description || "").replace(/<\/?[^>]+(>|$)/g, "").substr(0, 150) + "...",
+        category: mapFtgCategory(g.genre, g.title),
+        coverUrl: g.thumbnail.replace('http:', 'https:'),
+        rating: isPop ? Number((Math.random() * (5 - 4.7) + 4.7).toFixed(1)) : Number((Math.random() * (5 - 3.8) + 3.8).toFixed(1)),
+        isWebGame: g.platform.includes('Web Browser') || Math.random() > 0.5,
+        gameUrl: "https://html5.gamedistribution.com/rvvASMiM6KXzbfYALxyBPd0raxZ6vd9SV/",
+        downloadUrl: g.game_url,
+        isPopular: isPop
+      };
+    });
 
     // 3. Merge them and shuffle slightly
     const allGames = [...casualGames, ...hardcoreGames].sort(() => Math.random() - 0.5);
