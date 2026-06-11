@@ -4,6 +4,63 @@
   min-height: 100vh;
 }
 
+/* Promo Code Section */
+.promo-section {
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.promo-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.promo-input-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.promo-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius-sm);
+  font-family: inherit;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.promo-feedback {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+}
+
+.promo-success {
+  background: rgba(0, 255, 150, 0.1);
+  color: #00ff96;
+  border: 1px solid rgba(0, 255, 150, 0.3);
+}
+
+.promo-error {
+  background: rgba(255, 80, 80, 0.1);
+  color: #ff5050;
+  border: 1px solid rgba(255, 80, 80, 0.3);
+}
+
+
 .pricing-header {
   text-align: center;
   margin-bottom: 4rem;
