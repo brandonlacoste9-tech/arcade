@@ -40,10 +40,8 @@ async function generateAllGames() {
       const t = title.toLowerCase();
       
       if (g.includes('card')) return 'Cards';
-      if (t.includes('bubble') || t.includes('pop') || t.includes('ball') || g.includes('shooter')) {
-        if (t.includes('bubble') || Math.random() > 0.8) return 'Bubble Shooters';
-      }
-      if (g.includes('puzzle') || g.includes('board') || g.includes('trivia') || t.includes('match') || Math.random() > 0.95) return 'Puzzle';
+      if (t.includes('bubble')) return 'Bubble Shooters';
+      if (g.includes('puzzle') || g.includes('board') || g.includes('trivia') || t.includes('match')) return 'Puzzle';
       if (g.includes('strategy') || g.includes('moba') || g.includes('rts') || g.includes('turn-based')) return 'Strategy';
       if (g.includes('action') || g.includes('fighting') || g.includes('mmo') || g.includes('battle royale') || g.includes('shooter')) return 'Action';
       return 'Arcade';
