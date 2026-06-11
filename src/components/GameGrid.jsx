@@ -1,28 +1,52 @@
 import React, { useState } from 'react';
+import { Search } from 'lucide-react';
 import GameCard from './GameCard';
 import { gamesData } from '../data/games';
 import './GameGrid.css';
 
 const GameGrid = () => {
   const [activeFilter, setActiveFilter] = useState('All');
-  const filters = ['All', 'Action', 'Strategy', 'Puzzle', 'Arcade', 'Cards', 'Bubble Shooters'];
+  const [searchQuery, setSearchQuery] = useState('');
+  
+  const categories = ['Action', 'Strategy', 'Puzzle', 'Arcade', 'Cards', 'Bubble Shooters'];
+  const filters = ['All', ...categories];
 
-  const filteredGames = activeFilter === 'All' 
-    ? gamesData.slice(0, 24) // Limit to 24 for "All" to avoid massive page load initially
-    : gamesData.filter(game => game.category === activeFilter);
+  // First filter by search query
+  const searchedGames = searchQuery.trim() 
+    ? gamesData.filter(g => g.title.toLowerCase().includes(searchQuery.toLowerCase()))
+    : gamesData;
+
+  // Then filter by active tab (if searching, show results in a grid regardless of tab, unless a tab is forced)
+  const isGridView = activeFilter !== 'All' || searchQuery.trim() !== '';
+  
+  const filteredGridGames = activeFilter === 'All'
+    ? searchedGames
+    : searchedGames.filter(game => game.category === activeFilter);
 
   return (
     <section className="game-section container">
       <div className="section-header">
         <h2 className="section-title">
-          Trending <span className="text-gradient">Now</span>
+          The <span className="text-gradient">Arcade</span>
         </h2>
+        
+        <div className="search-bar-container">
+          <Search size={20} className="search-icon" />
+          <input 
+            type="text" 
+            className="search-input glass-input"
+            placeholder="Search for a game..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+
         <div className="section-filters">
           {filters.map(filter => (
             <button 
               key={filter}
               className={`filter-btn ${activeFilter === filter ? 'active' : ''}`}
-              onClick={() => setActiveFilter(filter)}
+              onClick={() => { setActiveFilter(filter); setSearchQuery(''); }}
             >
               {filter}
             </button>
@@ -30,13 +54,44 @@ const GameGrid = () => {
         </div>
       </div>
       
-      <div className="game-grid">
-        {filteredGames.map((game, index) => (
-          <div key={game.id} style={{ animationDelay: `${(index % 12) * 0.05}s` }} className="animate-fade-in">
-            <GameCard game={game} />
-          </div>
-        ))}
-      </div>
+      {isGridView ? (
+        // Grid View (Search Results or Specific Category)
+        <div className="game-grid">
+          {filteredGridGames.length > 0 ? (
+            filteredGridGames.map((game, index) => (
+              <div key={game.id} style={{ animationDelay: `${(index % 12) * 0.05}s` }} className="animate-fade-in">
+                <GameCard game={game} />
+              </div>
+            ))
+          ) : (
+            <div className="no-results">No games found. Try a different search.</div>
+          )}
+        </div>
+      ) : (
+        // Netflix-style Row View (The 'All' tab without active search)
+        <div className="game-rows-container">
+          {categories.map(category => {
+            const categoryGames = searchedGames.filter(g => g.category === category).slice(0, 10);
+            if (categoryGames.length === 0) return null;
+            
+            return (
+              <div key={category} className="game-row-section animate-fade-in">
+                <div className="game-row-header">
+                  <h3>Top in {category}</h3>
+                  <button className="view-all-btn" onClick={() => setActiveFilter(category)}>View All</button>
+                </div>
+                <div className="game-row">
+                  {categoryGames.map(game => (
+                    <div key={game.id} className="game-row-item">
+                      <GameCard game={game} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </section>
   );
 };
