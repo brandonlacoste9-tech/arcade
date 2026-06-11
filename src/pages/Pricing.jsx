@@ -82,7 +82,7 @@ const Pricing = () => {
           <input
             type="text"
             className="glass-input promo-input"
-            placeholder="Enter code (e.g. BEE1976)"
+            placeholder="Enter promo code..."
             value={promoCode}
             onChange={(e) => { setPromoCode(e.target.value); setPromoStatus(null); }}
             onKeyDown={(e) => e.key === 'Enter' && handlePromoApply()}
