@@ -20,8 +20,33 @@ const Pricing = () => {
       navigate('/login');
       return;
     }
-    await subscribe();
-    navigate('/games');
+    
+    try {
+      const response = await fetch('http://localhost:4242/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: user.id,
+          email: user.email
+        }),
+      });
+
+      const { url, error } = await response.json();
+      
+      if (error) {
+        console.error('Stripe Error:', error);
+        return;
+      }
+      
+      // Redirect to Stripe Checkout
+      if (url) {
+        window.location.href = url;
+      }
+    } catch (err) {
+      console.error('Failed to create checkout session:', err);
+    }
   };
 
   const handlePromoApply = async () => {
