@@ -22,14 +22,14 @@ const HeroSection = () => {
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
               display: 'block',
-              fontSize: '5rem',
+              fontSize: '8rem',
               fontWeight: 900,
               lineHeight: 0.9,
               filter: 'drop-shadow(0 0 20px rgba(255, 107, 0, 0.6))',
             }}>HELL<br/>YEAH</span>
             <span style={{
               display: 'block',
-              fontSize: '2.5rem',
+              fontSize: '4rem',
               letterSpacing: '10px',
               color: 'var(--text-secondary)',
               fontWeight: 700,
