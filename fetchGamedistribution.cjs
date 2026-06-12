@@ -58,6 +58,7 @@ async function generateAllGames() {
 
     const hardcoreGames = ftgData.slice(0, 360).map(g => {
       const isPop = popularTitles.some(pt => g.title.toLowerCase().includes(pt));
+      const isWeb = g.platform.toLowerCase().includes('web browser');
       return {
         id: g.id.toString(),
         title: g.title,
@@ -65,8 +66,8 @@ async function generateAllGames() {
         category: mapFtgCategory(g.genre, g.title),
         coverUrl: g.thumbnail.replace('http:', 'https:'),
         rating: isPop ? Number((Math.random() * (5 - 4.7) + 4.7).toFixed(1)) : Number((Math.random() * (5 - 3.8) + 3.8).toFixed(1)),
-        isWebGame: g.platform.includes('Web Browser') || Math.random() > 0.5,
-        gameUrl: "https://html5.gamedistribution.com/rvvASMiM6KXzbfYALxyBPd0raxZ6vd9SV/",
+        isWebGame: isWeb,
+        gameUrl: isWeb ? g.game_url : null,
         downloadUrl: g.game_url,
         isPopular: isPop
       };

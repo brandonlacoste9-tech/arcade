@@ -100,7 +100,7 @@ const GamePage = () => {
               <Share2 size={20} />
               Share
             </button>
-            {game.isWebGame && (
+            {game.isWebGame ? (
               <>
                 <button className="btn btn-primary action-btn" onClick={() => navigate(`/play/${game.id}`)}>
                   <Play size={20} fill="currentColor" />
@@ -111,6 +111,11 @@ const GamePage = () => {
                   Open in New Tab
                 </a>
               </>
+            ) : (
+              <a href={game.downloadUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary action-btn">
+                <Download size={20} />
+                Visit Game Page
+              </a>
             )}
           </div>
 
