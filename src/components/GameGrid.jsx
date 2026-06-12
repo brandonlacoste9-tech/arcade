@@ -9,7 +9,7 @@ const GameGrid = () => {
   const [searchQuery, setSearchQuery] = useState('');
   
   const categories = ['Action', 'Strategy', 'Puzzle', 'Arcade', 'Cards', 'Bubble Shooters'];
-  const filters = ['All', ...categories];
+  const filters = ['All', 'Popular', ...categories];
 
   // First filter by search query
   const searchedGames = searchQuery.trim() 
@@ -21,7 +21,9 @@ const GameGrid = () => {
   
   const filteredGridGames = activeFilter === 'All'
     ? searchedGames
-    : searchedGames.filter(game => game.category === activeFilter);
+    : activeFilter === 'Popular'
+      ? searchedGames.filter(game => game.isPopular)
+      : searchedGames.filter(game => game.category === activeFilter);
 
   return (
     <section className="game-section container">
@@ -75,6 +77,7 @@ const GameGrid = () => {
           <div className="game-row-section animate-fade-in" style={{ marginBottom: '1rem' }}>
             <div className="game-row-header">
               <h3><span className="text-gradient">Most Popular</span> PC Games</h3>
+              <button className="view-all-btn" onClick={() => setActiveFilter('Popular')}>View All</button>
             </div>
             <div className="game-row" style={{ paddingBottom: '2rem' }}>
               {searchedGames.filter(g => g.isPopular).map(game => (
