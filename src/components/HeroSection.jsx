@@ -70,26 +70,6 @@ const HeroSection = () => {
         </div>
         
         <div className="hero-visual animate-fade-in" style={{ animationDelay: '0.2s' }}>
-          <div 
-            className="hero-card glass-panel featured-game-card" 
-            onClick={() => navigate('/game/13')}
-            style={{ cursor: 'pointer' }}
-          >
-            <div className="featured-image-container">
-              <img 
-                src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop" 
-                alt="Featured Game" 
-                className="featured-image"
-              />
-              <div className="featured-overlay"></div>
-            </div>
-            <div className="featured-info">
-              <span className="category-tag">Cyberpunk • Action</span>
-              <h3>Neon Eclipse</h3>
-              <p>The highly anticipated sequel is finally here. Play now.</p>
-            </div>
-          </div>
-          
           {/* Decorative elements */}
           <div className="glow-orb orb-1"></div>
           <div className="glow-orb orb-2"></div>
