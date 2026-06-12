@@ -3,6 +3,9 @@ import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import GameGrid from './components/GameGrid';
 import GamePage from './components/GamePage';
+import GamePlayer from './pages/GamePlayer';
+import MyLibrary from './pages/MyLibrary';
+import AdminDashboard from './pages/AdminDashboard';
 import Login from './pages/Login';
 import Pricing from './pages/Pricing';
 import Games from './pages/Games';
@@ -22,12 +25,15 @@ function App() {
             </>
           } />
           <Route path="/game/:id" element={<GamePage />} />
+          <Route path="/play/:id" element={<GamePlayer />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Login />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/games" element={<Games />} />
           <Route path="/categories" element={<Games />} />
           <Route path="/about" element={<About />} />
+          <Route path="/my-library" element={<MyLibrary />} />
+          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </main>
     </>

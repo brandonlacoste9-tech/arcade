@@ -38,6 +38,30 @@
   --glow-primary: 0 0 20px rgba(0, 229, 255, 0.3);
 }
 
+body.light-theme {
+  --bg-color: #f8f9fa;
+  --surface-color: #ffffff;
+  --surface-color-glass: rgba(255, 255, 255, 0.85);
+  
+  --primary-color: #00b4d8;
+  --primary-color-hover: #0096c7;
+  --secondary-color: #9d4edd;
+  
+  --text-primary: #1a1f2e;
+  --text-secondary: #495057;
+  --text-muted: #adb5bd;
+
+  --accent-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  
+  --border-color: rgba(0, 0, 0, 0.1);
+  --glass-border: 1px solid rgba(0, 0, 0, 0.08);
+  
+  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.12);
+  --glow-primary: 0 0 20px rgba(0, 180, 216, 0.4);
+}
+
 * {
   margin: 0;
   padding: 0;

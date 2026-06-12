@@ -101,10 +101,16 @@ const GamePage = () => {
               Share
             </button>
             {game.isWebGame && (
-              <a href={game.gameUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline action-btn">
-                <ExternalLink size={20} />
-                Open in New Tab
-              </a>
+              <>
+                <button className="btn btn-primary action-btn" onClick={() => navigate(`/play/${game.id}`)}>
+                  <Play size={20} fill="currentColor" />
+                  Theater Mode
+                </button>
+                <a href={game.gameUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline action-btn">
+                  <ExternalLink size={20} />
+                  Open in New Tab
+                </a>
+              </>
             )}
           </div>
 

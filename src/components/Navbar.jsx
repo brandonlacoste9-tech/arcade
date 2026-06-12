@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Gamepad2, Menu, X, Search, User, Globe } from 'lucide-react';
+import { Gamepad2, Menu, X, Search, User, Globe, Sun, Moon } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import './Navbar.css';
 
@@ -10,7 +11,22 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user, plan, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      const checkAdmin = async () => {
+        const { supabase } = await import('../supabaseClient');
+        const { data } = await supabase.from('profiles').select('role').eq('id', user.id).single();
+        if (data && data.role === 'admin') setIsAdmin(true);
+      };
+      checkAdmin();
+    } else {
+      setIsAdmin(false);
+    }
+  }, [user]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +49,7 @@ const Navbar = () => {
           <Link to="/" className="nav-link active">{t('nav.home')}</Link>
           <Link to="/games" className="nav-link">{t('nav.games')}</Link>
           <Link to="/categories" className="nav-link">{t('nav.categories')}</Link>
+          {user && <Link to="/my-library" className="nav-link" style={{ color: 'var(--primary-color)' }}>My Library</Link>}
           <Link to="/about" className="nav-link">{t('nav.about')}</Link>
         </div>
 
@@ -56,6 +73,9 @@ const Navbar = () => {
           <button className="icon-btn" aria-label="Search">
             <Search size={20} />
           </button>
+          <button className="icon-btn" aria-label="Toggle Theme" onClick={toggleTheme}>
+            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
           
           {user ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -63,6 +83,7 @@ const Navbar = () => {
                 <User size={16} />
                 {user.user_metadata?.username || user.email}
                 {plan === 'PRO' && <span style={{ background: 'var(--accent-gradient)', color: '#fff', fontSize: '0.7rem', padding: '0.1rem 0.4rem', borderRadius: '10px', fontWeight: 'bold' }}>PRO</span>}
+                {isAdmin && <Link to="/admin" style={{ marginLeft: '0.5rem', background: 'var(--primary-color)', color: '#000', fontSize: '0.7rem', padding: '0.1rem 0.4rem', borderRadius: '10px', fontWeight: 'bold', textDecoration: 'none' }}>ADMIN</Link>}
               </span>
               <button className="btn btn-outline" onClick={logout}>{t('nav.logout')}</button>
               {plan === 'FREE' && <button className="btn btn-primary" onClick={() => navigate('/pricing')}>{t('nav.gopro')}</button>}
@@ -89,6 +110,10 @@ const Navbar = () => {
           <Link to="/" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>{t('nav.home')}</Link>
           <Link to="/games" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>{t('nav.games')}</Link>
           <Link to="/categories" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>{t('nav.categories')}</Link>
+          {user && <Link to="/my-library" className="mobile-nav-link" style={{ color: 'var(--primary-color)' }} onClick={() => setMobileMenuOpen(false)}>My Library</Link>}
+          <button className="mobile-nav-link" style={{ background: 'transparent', border: 'none', textAlign: 'left', cursor: 'pointer', color: 'inherit' }} onClick={toggleTheme}>
+            {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+          </button>
           <hr className="menu-divider" />
           {user ? (
             <>

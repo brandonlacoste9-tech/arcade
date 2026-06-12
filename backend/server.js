@@ -127,5 +127,39 @@ app.post('/create-checkout-session', async (req, res) => {
   }
 });
 
+// --- ADMIN ROUTES --- //
+
+// Fetch all users
+app.get('/api/users', async (req, res) => {
+  try {
+    const { data, error } = await supabaseAdmin
+      .from('profiles')
+      .select('id, username, plan, role')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Update user plan
+app.post('/api/users/:id/plan', async (req, res) => {
+  const { id } = req.params;
+  const { plan } = req.body;
+  try {
+    const { error } = await supabaseAdmin
+      .from('profiles')
+      .update({ plan })
+      .eq('id', id);
+
+    if (error) throw error;
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 const PORT = process.env.PORT || 4242;
 app.listen(PORT, () => console.log(`Node server listening on port ${PORT}!`));
