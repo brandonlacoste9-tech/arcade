@@ -120,7 +120,7 @@ const GamePage = () => {
             <p className="mt-4">
               Get ready to immerse yourself in the world of {game.title}. 
               Whether you are looking for a quick session or a deep dive, this game offers 
-              premium entertainment right from NexGames platform.
+              premium entertainment right from Hell Yeah Games platform.
             </p>
           </div>
           

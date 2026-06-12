@@ -35,7 +35,7 @@ const Login = () => {
         <div className="auth-header">
           <Gamepad2 className="logo-icon" size={48} />
           <h2 className="text-gradient">{isSignup ? 'Create Account' : 'Welcome Back'}</h2>
-          <p>{isSignup ? 'Join NexGames' : 'Sign in to your NexGames account'}</p>
+          <p>{isSignup ? 'Join Hell Yeah Games' : 'Sign in to your Hell Yeah Games account'}</p>
         </div>
         
         {errorMsg && <div style={{ color: 'red', background: 'rgba(255,0,0,0.1)', padding: '1rem', borderRadius: '8px' }}>{errorMsg}</div>}

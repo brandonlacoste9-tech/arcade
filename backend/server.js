@@ -101,7 +101,7 @@ app.post('/create-checkout-session', async (req, res) => {
           price_data: {
             currency: 'usd',
             product_data: {
-              name: 'NexGames - Pro Gamer Plan',
+              name: 'Hell Yeah Games - Pro Gamer Plan',
               description: 'Unlimited access to all premium games, ad-free.',
               images: ['https://gamedistribution.com/images/logo.png'], // Placeholder
             },
