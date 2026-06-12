@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Gamepad2 } from 'lucide-react';
+import { Gamepad2, Eye, EyeOff } from 'lucide-react';
 import './Auth.css';
 
 const Login = () => {
@@ -10,6 +10,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
   
   const { login, signup } = useAuth();
   const navigate = useNavigate();
@@ -67,15 +69,40 @@ const Login = () => {
           </div>
           <div className="form-group">
             <label>Password</label>
-            <input 
-              type="password" 
-              className="form-control glass-input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              required 
-            />
+            <div className="password-input-wrapper">
+              <input 
+                type={showPassword ? "text" : "password"} 
+                className="form-control glass-input full-width"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+                required 
+              />
+              <button 
+                type="button" 
+                className="password-toggle-btn" 
+                onClick={() => setShowPassword(!showPassword)}
+                tabIndex="-1"
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
           </div>
+          
+          {!isSignup && (
+            <div className="form-group remember-me-group">
+              <label className="checkbox-label">
+                <input 
+                  type="checkbox" 
+                  checked={rememberMe} 
+                  onChange={(e) => setRememberMe(e.target.checked)} 
+                  className="custom-checkbox"
+                />
+                Remember me
+              </label>
+            </div>
+          )}
+          
           <button type="submit" className="btn btn-primary full-width">{isSignup ? 'Sign Up' : 'Log In'}</button>
         </form>
         
