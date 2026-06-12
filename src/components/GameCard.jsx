@@ -6,25 +6,10 @@ import { useAuth } from '../context/AuthContext';
 import './GameCard.css';
 
 const GameCard = ({ game }) => {
-  const { user } = useAuth();
-  const [isFavorite, setIsFavorite] = useState(false);
+  const { user, favorites, toggleFavorite } = useAuth();
+  const isFavorite = favorites?.has(game.id) || false;
 
-  useEffect(() => {
-    if (user) {
-      const checkFav = async () => {
-        const { data } = await supabase
-          .from('user_favorites')
-          .select('id')
-          .eq('user_id', user.id)
-          .eq('game_id', game.id)
-          .single();
-        if (data) setIsFavorite(true);
-      };
-      checkFav();
-    }
-  }, [user, game.id]);
-
-  const toggleFavorite = async (e) => {
+  const handleToggleFavorite = async (e) => {
     e.preventDefault(); // prevent routing
     e.stopPropagation();
     
@@ -33,13 +18,7 @@ const GameCard = ({ game }) => {
       return;
     }
 
-    if (isFavorite) {
-      await supabase.from('user_favorites').delete().eq('user_id', user.id).eq('game_id', game.id);
-      setIsFavorite(false);
-    } else {
-      await supabase.from('user_favorites').insert([{ user_id: user.id, game_id: game.id }]);
-      setIsFavorite(true);
-    }
+    await toggleFavorite(game.id);
   };
 
   return (
@@ -61,7 +40,7 @@ const GameCard = ({ game }) => {
         {/* Heart Icon Overlay */}
         <button 
           className="icon-btn" 
-          onClick={toggleFavorite}
+          onClick={handleToggleFavorite}
           style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 10, background: 'rgba(0,0,0,0.5)', padding: '0.4rem' }}
         >
           <Heart size={18} fill={isFavorite ? 'var(--primary-color)' : 'none'} color={isFavorite ? 'var(--primary-color)' : '#fff'} />

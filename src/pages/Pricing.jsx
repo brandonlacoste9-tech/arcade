@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { supabase } from '../supabaseClient';
 import { Check, Star, Tag, CheckCircle, XCircle } from 'lucide-react';
 import './Pricing.css';
 
-const VALID_PROMO_CODES = {
-  'BEELEE1976': 'Pro Gamer plan unlocked for free! Welcome, Boss 👑'
-};
+import './Pricing.css';
 
 const Pricing = () => {
-  const { user, subscribe, plan } = useAuth();
+  const { user, plan } = useAuth();
   const navigate = useNavigate();
   const [promoCode, setPromoCode] = useState('');
   const [promoStatus, setPromoStatus] = useState(null); // null | 'success' | 'error'
@@ -22,7 +21,8 @@ const Pricing = () => {
     }
     
     try {
-      const response = await fetch('http://localhost:4242/create-checkout-session', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4242';
+      const response = await fetch(`${apiUrl}/create-checkout-session`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,17 +51,37 @@ const Pricing = () => {
 
   const handlePromoApply = async () => {
     const code = promoCode.trim().toUpperCase();
-    if (VALID_PROMO_CODES[code]) {
-      if (!user) {
-        navigate('/login');
-        return;
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+    
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4242';
+      
+      const res = await fetch(`${apiUrl}/api/redeem-promo`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session?.access_token}`
+        },
+        body: JSON.stringify({ code })
+      });
+      
+      const data = await res.json();
+      
+      if (res.ok) {
+        setPromoStatus('success');
+        setPromoMessage(data.message);
+        setTimeout(() => window.location.reload(), 1500);
+      } else {
+        setPromoStatus('error');
+        setPromoMessage(data.error || 'Invalid promo code.');
       }
-      await subscribe();
-      setPromoStatus('success');
-      setPromoMessage(VALID_PROMO_CODES[code]);
-    } else {
+    } catch (err) {
       setPromoStatus('error');
-      setPromoMessage('Invalid promo code. Please try again.');
+      setPromoMessage('An error occurred. Please try again.');
     }
   };
 

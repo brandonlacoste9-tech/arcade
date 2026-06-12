@@ -72,7 +72,7 @@ const HeroSection = () => {
         <div className="hero-visual animate-fade-in" style={{ animationDelay: '0.2s' }}>
           <div 
             className="hero-card glass-panel featured-game-card" 
-            onClick={() => navigate('/game/2048')}
+            onClick={() => navigate('/game/13')}
             style={{ cursor: 'pointer' }}
           >
             <div className="featured-image-container">

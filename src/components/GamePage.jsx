@@ -9,8 +9,18 @@ import './GamePage.css';
 const GamePage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user, plan } = useAuth();
+  const { user, plan, favorites, toggleFavorite } = useAuth();
   const game = gamesData.find(g => g.id === id);
+
+  const isFavorite = favorites?.has(game?.id) || false;
+
+  const handleSave = async () => {
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+    await toggleFavorite(game.id);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -109,9 +119,9 @@ const GamePage = () => {
           </div>
           
           <div className="game-info-actions">
-            <button className="btn btn-outline action-btn">
-              <Heart size={20} />
-              Save
+            <button className="btn btn-outline action-btn" onClick={handleSave}>
+              <Heart size={20} fill={isFavorite ? 'var(--primary-color)' : 'none'} color={isFavorite ? 'var(--primary-color)' : 'currentColor'} />
+              {isFavorite ? 'Saved' : 'Save'}
             </button>
             <button className="btn btn-outline action-btn">
               <Share2 size={20} />
@@ -123,16 +133,25 @@ const GamePage = () => {
                   <Play size={20} fill="currentColor" />
                   Theater Mode
                 </button>
-                <a href={game.gameUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline action-btn">
-                  <ExternalLink size={20} />
-                  Open in New Tab
-                </a>
+                {plan === 'PRO' && (
+                  <a href={game.gameUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline action-btn">
+                    <ExternalLink size={20} />
+                    Open in New Tab
+                  </a>
+                )}
               </>
             ) : (
-              <a href={game.downloadUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary action-btn">
-                <Download size={20} />
-                Visit Game Page
-              </a>
+              plan === 'PRO' ? (
+                <a href={game.downloadUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary action-btn">
+                  <Download size={20} />
+                  Visit Game Page
+                </a>
+              ) : (
+                <button className="btn btn-primary action-btn" onClick={() => navigate('/pricing')}>
+                  <Lock size={20} />
+                  Subscribe to Download
+                </button>
+              )
             )}
           </div>
 

@@ -8,6 +8,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null); 
   const [plan, setPlan] = useState('FREE'); 
+  const [favorites, setFavorites] = useState(new Set());
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -28,6 +29,7 @@ export const AuthProvider = ({ children }) => {
         fetchProfile(session.user.id);
       } else {
         setPlan('FREE');
+        setFavorites(new Set());
         setLoading(false);
       }
     });
@@ -45,6 +47,16 @@ export const AuthProvider = ({ children }) => {
     if (data) {
       setPlan(data.plan);
     }
+    
+    const { data: favs } = await supabase
+      .from('user_favorites')
+      .select('game_id')
+      .eq('user_id', userId);
+      
+    if (favs) {
+      setFavorites(new Set(favs.map(f => f.game_id)));
+    }
+
     setLoading(false);
   };
 
@@ -70,20 +82,30 @@ export const AuthProvider = ({ children }) => {
     await supabase.auth.signOut();
   };
 
-  const subscribe = async () => {
-    if (!user) return;
-    const { error } = await supabase
-      .from('profiles')
-      .update({ plan: 'PRO' })
-      .eq('id', user.id);
+  const toggleFavorite = async (gameId) => {
+    if (!user) return false;
     
-    if (!error) {
-      setPlan('PRO');
+    const isFav = favorites.has(gameId);
+    if (isFav) {
+      await supabase.from('user_favorites').delete().eq('user_id', user.id).eq('game_id', gameId);
+      setFavorites(prev => {
+        const next = new Set(prev);
+        next.delete(gameId);
+        return next;
+      });
+    } else {
+      await supabase.from('user_favorites').insert([{ user_id: user.id, game_id: gameId }]);
+      setFavorites(prev => {
+        const next = new Set(prev);
+        next.add(gameId);
+        return next;
+      });
     }
+    return !isFav;
   };
 
   return (
-    <AuthContext.Provider value={{ user, plan, loading, login, signup, logout, subscribe }}>
+    <AuthContext.Provider value={{ user, plan, loading, login, signup, logout, favorites, toggleFavorite }}>
       {!loading && children}
     </AuthContext.Provider>
   );

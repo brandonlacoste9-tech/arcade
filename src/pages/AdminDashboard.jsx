@@ -34,7 +34,8 @@ const AdminDashboard = () => {
   const fetchUsers = async () => {
     try {
       const { data: { session } } = await supabase.auth.getSession();
-      const res = await fetch('http://localhost:4242/api/users', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4242';
+      const res = await fetch(`${apiUrl}/api/users`, {
         headers: {
           'Authorization': `Bearer ${session?.access_token}`
         }
@@ -51,7 +52,8 @@ const AdminDashboard = () => {
     const newPlan = currentPlan === 'PRO' ? 'FREE' : 'PRO';
     try {
       const { data: { session } } = await supabase.auth.getSession();
-      const res = await fetch(`http://localhost:4242/api/users/${userId}/plan`, {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4242';
+      const res = await fetch(`${apiUrl}/api/users/${userId}/plan`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

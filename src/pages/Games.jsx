@@ -9,7 +9,8 @@ const Games = () => {
   useEffect(() => {
     const sessionId = searchParams.get('session_id');
     if (sessionId) {
-      fetch('http://localhost:4242/verify-session', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:4242';
+      fetch(`${apiUrl}/verify-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId })

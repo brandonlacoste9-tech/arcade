@@ -53,7 +53,11 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
       // Update the user's profile in Supabase to 'PRO'
       const { error } = await supabaseAdmin
         .from('profiles')
-        .update({ plan: 'PRO' })
+        .update({ 
+          plan: 'PRO',
+          stripe_customer_id: session.customer,
+          stripe_subscription_id: session.subscription
+        })
         .eq('id', userId);
 
       if (error) {
@@ -62,6 +66,22 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
       }
       console.log(`User ${userId} successfully upgraded!`);
     }
+  }
+
+  // Handle subscription cancellation / failure
+  if (event.type === 'customer.subscription.deleted') {
+    const subscription = event.data.object;
+    console.log(`Downgrading subscription ${subscription.id} to FREE...`);
+    const { error } = await supabaseAdmin
+      .from('profiles')
+      .update({ plan: 'FREE' })
+      .eq('stripe_subscription_id', subscription.id);
+
+    if (error) {
+      console.error('Error downgrading Supabase profile:', error);
+      return res.status(500).end();
+    }
+    console.log(`Subscription ${subscription.id} successfully downgraded.`);
   }
 
   res.json({ received: true });
@@ -146,6 +166,29 @@ app.post('/create-checkout-session', async (req, res) => {
 
 // --- ADMIN ROUTES --- //
 
+// Middleware to verify Supabase JWT (any authenticated user)
+const requireAuth = async (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Missing or invalid authorization header' });
+  }
+
+  const token = authHeader.split(' ')[1];
+
+  try {
+    const { data: { user }, error: authError } = await supabaseAdmin.auth.getUser(token);
+    
+    if (authError || !user) {
+      return res.status(401).json({ error: 'Invalid or expired token' });
+    }
+
+    req.user = user;
+    next();
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 // Middleware to verify Supabase JWT and check if user is an admin
 const requireAdmin = async (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -208,6 +251,30 @@ app.post('/api/users/:id/plan', requireAdmin, async (req, res) => {
     res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+// --- PROMO ROUTES --- //
+const VALID_PROMO_CODES = {
+  'BEELEE1976': 'Pro Gamer plan unlocked for free! Welcome, Boss 👑'
+};
+
+app.post('/api/redeem-promo', requireAuth, async (req, res) => {
+  const { code } = req.body;
+  if (VALID_PROMO_CODES[code]) {
+    try {
+      const { error } = await supabaseAdmin
+        .from('profiles')
+        .update({ plan: 'PRO' })
+        .eq('id', req.user.id);
+      
+      if (error) throw error;
+      res.json({ success: true, message: VALID_PROMO_CODES[code] });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  } else {
+    res.status(400).json({ error: 'Invalid promo code.' });
   }
 });
 
