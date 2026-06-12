@@ -5,7 +5,7 @@ const SEO = ({ title, description, url, image, type = 'website', schema }) => {
   const siteName = 'HELL YEAH GAMES';
   const defaultTitle = '🔥 HELL YEAH GAMES — Play Now';
   const defaultDescription = "Hell Yeah Games — 860+ of the world's best casual & hardcore browser games. One platform. Zero compromises.";
-  const defaultImage = 'https://hellyeah-games.com/banner.jpg'; // We can update this when an official banner is ready
+  const defaultImage = 'https://hellyeah-games.com/seo-banner.jpg';
   const defaultUrl = 'https://hellyeah-games.com';
 
   const seoTitle = title ? `${title} | ${siteName}` : defaultTitle;
