@@ -73,7 +73,7 @@ const Navbar = () => {
             <Globe size={16} />
             <select 
               onChange={(e) => i18n.changeLanguage(e.target.value)}
-              defaultValue={i18n.language}
+              value={i18n.language || 'en'}
               style={{ background: 'transparent', color: 'inherit', border: 'none', outline: 'none', cursor: 'pointer' }}
             >
               <option value="en">EN</option>
@@ -129,8 +129,8 @@ const Navbar = () => {
           <div className="mobile-nav-link" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'inherit' }}>
             <Globe size={18} />
             <select 
-              onChange={(e) => { i18n.changeLanguage(e.target.value); setMobileMenuOpen(false); }}
-              defaultValue={i18n.language}
+              onChange={(e) => i18n.changeLanguage(e.target.value)}
+              value={i18n.language || 'en'}
               style={{ background: 'transparent', color: 'inherit', border: '1px solid var(--border-color)', borderRadius: '4px', padding: '4px 8px', outline: 'none', cursor: 'pointer', flex: 1 }}
             >
               <option value="en">English</option>
