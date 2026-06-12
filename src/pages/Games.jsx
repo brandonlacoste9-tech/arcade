@@ -39,7 +39,7 @@ const Games = () => {
         </div>
       )}
       <div className="container" style={{ textAlign: 'center', paddingTop: '2rem' }}>
-        <h1>The Arcade <span className="text-gradient">Catalog</span></h1>
+        <h1>NexGames <span className="text-gradient">Catalog</span></h1>
         <p style={{ color: 'var(--text-secondary)' }}>Browse our entire collection of premium games.</p>
       </div>
       <GameGrid />

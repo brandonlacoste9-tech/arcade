@@ -150,7 +150,7 @@ const Pricing = () => {
               <span className="amount">$9.99</span>
               <span className="period">/month</span>
             </div>
-            <p>Full unlimited access to The Arcade.</p>
+            <p>Full unlimited access to NexGames.</p>
           </div>
           <ul className="pricing-features">
             <li><Check size={16} className="text-primary" /> View all 288+ games</li>

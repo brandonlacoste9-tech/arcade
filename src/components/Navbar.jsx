@@ -42,7 +42,7 @@ const Navbar = () => {
       <div className="container navbar-container">
         <Link to="/" className="navbar-logo">
           <Gamepad2 className="logo-icon" size={32} />
-          <span className="logo-text text-gradient">The Arcade</span>
+          <span className="logo-text text-gradient">NexGames</span>
         </Link>
 
         <div className="navbar-links desktop-only">
