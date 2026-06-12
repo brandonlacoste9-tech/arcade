@@ -41,22 +41,21 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? 'navbar-scrolled glass-panel' : ''}`}>
       <div className="container navbar-container">
         <Link to="/" className="navbar-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-          <span style={{ fontSize: '1.5rem' }}>🔥</span>
           <span className="logo-text" style={{
             fontFamily: 'var(--font-heading)',
             fontWeight: 900,
             fontSize: '1.4rem',
             letterSpacing: '-0.5px',
             lineHeight: 1,
-            background: 'linear-gradient(135deg, #ff6b00, #ff0080, #00e5ff)',
+            background: 'linear-gradient(135deg, #ff2a2a, #ff4d4d, #8d99ae)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
             textTransform: 'uppercase',
-            filter: 'drop-shadow(0 0 12px rgba(255, 107, 0, 0.5))',
+            filter: 'drop-shadow(0 0 12px rgba(255, 42, 42, 0.5))',
           }}>
-            HELL YEAH<br/>
-            <span style={{ fontSize: '0.75rem', letterSpacing: '4px', opacity: 0.9 }}>GAMES</span>
+            GAMERS<br/>
+            <span style={{ fontSize: '0.75rem', letterSpacing: '4px', opacity: 0.9 }}>CYBORG</span>
           </span>
         </Link>
 

@@ -14,36 +14,15 @@ const HeroSection = () => {
       
       <div className="container hero-container">
         <div className="hero-content animate-fade-in">
-          <span className="hero-badge glass-panel">🔥 The Ultimate Gaming Platform</span>
-          <h1 className="hero-title" style={{ textTransform: 'uppercase', letterSpacing: '-1px' }}>
-            <span style={{
-              background: 'linear-gradient(135deg, #ff6b00, #ff0080, #00e5ff)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              display: 'block',
-              fontSize: '8rem',
-              fontWeight: 900,
-              lineHeight: 0.9,
-              filter: 'drop-shadow(0 0 20px rgba(255, 107, 0, 0.6))',
-            }}>HELL<br/>YEAH</span>
-            <span style={{
-              display: 'block',
-              fontSize: '4rem',
-              letterSpacing: '10px',
-              color: 'var(--text-secondary)',
-              fontWeight: 700,
-              marginTop: '0.25rem'
-            }}>GAMES</span>
-          </h1>
+
           <p className="hero-subtitle">
-            860+ of the world's best casual & hardcore games. One platform. Zero compromises. Let's play.
+            OVER 800+ OF YOUR FAVOURITE GAMES. ALL IN ONE PLACE. ANYTIME. EVERYWHERE. FREE REGISTRATION. START PLAYING.
           </p>
           
           <div className="hero-actions">
-            <button className="btn btn-primary btn-lg" onClick={() => navigate('/games')} style={{ background: 'linear-gradient(135deg, #ff6b00, #ff0080)', border: 'none' }}>
+            <button className="btn btn-primary btn-lg" onClick={() => navigate('/games')} style={{ background: 'linear-gradient(135deg, #ff2a2a, #8d99ae)', border: 'none' }}>
               <Play size={20} fill="currentColor" />
-              Start Playing 🔥
+              JOIN THE ADVENTURE.
             </button>
             <button className="btn btn-outline btn-lg" onClick={() => window.scrollTo({ top: 800, behavior: 'smooth' })}>
               Browse Catalog
@@ -53,17 +32,17 @@ const HeroSection = () => {
           
           <div className="hero-stats glass-panel">
             <div className="stat-item">
-              <span className="stat-value" style={{ color: '#ff6b00' }}>860+</span>
+              <span className="stat-value" style={{ color: '#ff2a2a' }}>860+</span>
               <span className="stat-label">Games</span>
             </div>
             <div className="stat-divider"></div>
             <div className="stat-item">
-              <span className="stat-value" style={{ color: '#ff0080' }}>500+</span>
+              <span className="stat-value" style={{ color: '#ff4d4d' }}>500+</span>
               <span className="stat-label">Browser Games</span>
             </div>
             <div className="stat-divider"></div>
             <div className="stat-item">
-              <span className="stat-value" style={{ color: '#00e5ff' }}>$9.99</span>
+              <span className="stat-value" style={{ color: '#8d99ae' }}>$9.99</span>
               <span className="stat-label">/ Month Unlimited</span>
             </div>
           </div>
