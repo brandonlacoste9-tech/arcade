@@ -1,28 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Check, Star, Tag, CheckCircle, XCircle } from 'lucide-react';
+import { Check, Star } from 'lucide-react';
+import { API_URL } from '../config';
 import './Pricing.css';
 
-const VALID_PROMO_CODES = {
-  'BEELEE1976': 'Pro Gamer plan unlocked for free! Welcome, Boss 👑'
-};
-
 const Pricing = () => {
-  const { user, subscribe, plan } = useAuth();
+  const { user, plan } = useAuth();
   const navigate = useNavigate();
-  const [promoCode, setPromoCode] = useState('');
-  const [promoStatus, setPromoStatus] = useState(null); // null | 'success' | 'error'
-  const [promoMessage, setPromoMessage] = useState('');
 
   const handleSubscribe = async () => {
     if (!user) {
       navigate('/login');
       return;
     }
-    
+
     try {
-      const response = await fetch('http://localhost:4242/create-checkout-session', {
+      const response = await fetch(`${API_URL}/create-checkout-session`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,71 +43,11 @@ const Pricing = () => {
     }
   };
 
-  const handlePromoApply = async () => {
-    const code = promoCode.trim().toUpperCase();
-    if (VALID_PROMO_CODES[code]) {
-      if (!user) {
-        navigate('/login');
-        return;
-      }
-      await subscribe();
-      setPromoStatus('success');
-      setPromoMessage(VALID_PROMO_CODES[code]);
-    } else {
-      setPromoStatus('error');
-      setPromoMessage('Invalid promo code. Please try again.');
-    }
-  };
-
   return (
     <div className="pricing-container container">
       <div className="pricing-header text-center animate-fade-in">
         <h1 className="pricing-title">Unlock <span className="text-gradient">Premium</span> Gaming</h1>
         <p className="pricing-subtitle">Choose the plan that fits your play style.</p>
-      </div>
-
-      {/* Promo Code Section */}
-      <div className="promo-section glass-panel animate-fade-in" style={{ animationDelay: '0.1s' }}>
-        <div className="promo-header">
-          <Tag size={20} style={{ color: 'var(--primary-color)' }} />
-          <span>Have a promo code?</span>
-        </div>
-        <div className="promo-input-row">
-          <input
-            type="text"
-            className="glass-input promo-input"
-            placeholder="Enter promo code..."
-            value={promoCode}
-            onChange={(e) => { setPromoCode(e.target.value); setPromoStatus(null); }}
-            onKeyDown={(e) => e.key === 'Enter' && handlePromoApply()}
-            disabled={plan === 'PRO'}
-          />
-          <button
-            className="btn btn-primary"
-            onClick={handlePromoApply}
-            disabled={!promoCode.trim() || plan === 'PRO'}
-          >
-            Apply
-          </button>
-        </div>
-        {promoStatus === 'success' && (
-          <div className="promo-feedback promo-success">
-            <CheckCircle size={16} />
-            {promoMessage}
-          </div>
-        )}
-        {promoStatus === 'error' && (
-          <div className="promo-feedback promo-error">
-            <XCircle size={16} />
-            {promoMessage}
-          </div>
-        )}
-        {plan === 'PRO' && promoStatus !== 'success' && (
-          <div className="promo-feedback promo-success">
-            <CheckCircle size={16} />
-            You already have an active Pro subscription!
-          </div>
-        )}
       </div>
 
       <div className="pricing-grid animate-fade-in" style={{ animationDelay: '0.2s' }}>

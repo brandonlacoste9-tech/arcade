@@ -1,6 +1,12 @@
 -- 1. Add role column to profiles table
 ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS role text DEFAULT 'user';
 
+-- 1a. Add Stripe identifiers so the backend can track subscriptions and handle
+--     cancellations/renewals. (Entitlement lockdown lives in
+--     migration_entitlement_lockdown.sql — run that too.)
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS stripe_customer_id text;
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS stripe_subscription_id text;
+
 -- 2. Make the very first user the Admin (this assumes the first signed-up user is the owner)
 UPDATE public.profiles 
 SET role = 'admin' 

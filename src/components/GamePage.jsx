@@ -118,16 +118,23 @@ const GamePage = () => {
               Share
             </button>
             {game.isWebGame ? (
-              <>
-                <button className="btn btn-primary action-btn" onClick={() => navigate(`/play/${game.id}`)}>
-                  <Play size={20} fill="currentColor" />
-                  Theater Mode
+              plan === 'PRO' ? (
+                <>
+                  <button className="btn btn-primary action-btn" onClick={() => navigate(`/play/${game.id}`)}>
+                    <Play size={20} fill="currentColor" />
+                    Theater Mode
+                  </button>
+                  <a href={game.gameUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline action-btn">
+                    <ExternalLink size={20} />
+                    Open in New Tab
+                  </a>
+                </>
+              ) : (
+                <button className="btn btn-primary action-btn" onClick={() => navigate('/pricing')}>
+                  <Lock size={20} />
+                  Subscribe to Play
                 </button>
-                <a href={game.gameUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline action-btn">
-                  <ExternalLink size={20} />
-                  Open in New Tab
-                </a>
-              </>
+              )
             ) : (
               <a href={game.downloadUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary action-btn">
                 <Download size={20} />

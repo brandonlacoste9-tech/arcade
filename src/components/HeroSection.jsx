@@ -72,7 +72,7 @@ const HeroSection = () => {
         <div className="hero-visual animate-fade-in" style={{ animationDelay: '0.2s' }}>
           <div 
             className="hero-card glass-panel featured-game-card" 
-            onClick={() => navigate('/game/2048')}
+            onClick={() => navigate('/game/f3ee6674b4ea4579aeefd54d7bf388f0')}
             style={{ cursor: 'pointer' }}
           >
             <div className="featured-image-container">
@@ -84,9 +84,9 @@ const HeroSection = () => {
               <div className="featured-overlay"></div>
             </div>
             <div className="featured-info">
-              <span className="category-tag">Cyberpunk • Action</span>
-              <h3>Neon Eclipse</h3>
-              <p>The highly anticipated sequel is finally here. Play now.</p>
+              <span className="category-tag">Featured • Arcade</span>
+              <h3>Traffic Racing</h3>
+              <p>Weave through traffic at top speed. Play now.</p>
             </div>
           </div>
           

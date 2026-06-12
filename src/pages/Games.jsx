@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import GameGrid from '../components/GameGrid';
+import { API_URL } from '../config';
 
 const Games = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -9,7 +10,7 @@ const Games = () => {
   useEffect(() => {
     const sessionId = searchParams.get('session_id');
     if (sessionId) {
-      fetch('http://localhost:4242/verify-session', {
+      fetch(`${API_URL}/verify-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId })
