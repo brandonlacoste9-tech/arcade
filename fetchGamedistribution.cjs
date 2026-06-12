@@ -2,10 +2,17 @@ const fs = require('fs');
 
 async function generateAllGames() {
   try {
-    // 1. Fetch Casual HTML5 Games (GameDistribution)
-    const gdRes = await fetch('https://catalog.api.gamedistribution.com/api/v2.0/rss/All/?collection=all&categories=All&type=all&amount=100&page=1&format=json');
-    const gdData = await gdRes.json();
-    const gdGamesList = gdData.length ? gdData : (gdData.items || gdData.games || []);
+    // 1. Fetch Casual HTML5 Games (GameDistribution) - 5 pages of 100 each = 500 games
+    console.log('Fetching 500 casual games from GameDistribution (5 pages)...');
+    const gdPages = await Promise.all([1, 2, 3, 4, 5].map(page =>
+      fetch(`https://catalog.api.gamedistribution.com/api/v2.0/rss/All/?collection=all&categories=All&type=all&amount=100&page=${page}&format=json`)
+        .then(r => r.json())
+        .catch(() => [])
+    ));
+    const gdGamesList = gdPages.flat().filter(g => g && g.Md5 && g.Title && g.Url);
+    // Deduplicate by Md5
+    const uniqueGd = Array.from(new Map(gdGamesList.map(g => [g.Md5, g])).values());
+    console.log(`Got ${uniqueGd.length} unique casual games.`);
     
     const mapGdCategory = (tags) => {
       const t = tags.join(' ').toLowerCase();
@@ -19,7 +26,7 @@ async function generateAllGames() {
       return 'Arcade';
     };
 
-    const casualGames = gdGamesList.map(g => ({
+    const casualGames = uniqueGd.map(g => ({
       id: g.Md5 || Math.random().toString(36).substr(2, 9),
       title: g.Title,
       description: (g.Description || "No description available.").replace(/<\/?[^>]+(>|$)/g, "").substr(0, 150) + "...",
