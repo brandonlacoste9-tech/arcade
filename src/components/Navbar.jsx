@@ -126,6 +126,22 @@ const Navbar = () => {
           <Link to="/games" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>{t('nav.games')}</Link>
           <Link to="/categories" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>{t('nav.categories')}</Link>
           {user && <Link to="/my-library" className="mobile-nav-link" style={{ color: 'var(--primary-color)' }} onClick={() => setMobileMenuOpen(false)}>My Library</Link>}
+          <div className="mobile-nav-link" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'inherit' }}>
+            <Globe size={18} />
+            <select 
+              onChange={(e) => { i18n.changeLanguage(e.target.value); setMobileMenuOpen(false); }}
+              defaultValue={i18n.language}
+              style={{ background: 'transparent', color: 'inherit', border: '1px solid var(--border-color)', borderRadius: '4px', padding: '4px 8px', outline: 'none', cursor: 'pointer', flex: 1 }}
+            >
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+              <option value="pt">Português</option>
+              <option value="it">Italiano</option>
+              <option value="hi">हिंदी</option>
+              <option value="pa">ਪੰਜਾਬੀ</option>
+            </select>
+          </div>
           <button className="mobile-nav-link" style={{ background: 'transparent', border: 'none', textAlign: 'left', cursor: 'pointer', color: 'inherit' }} onClick={toggleTheme}>
             {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
           </button>
