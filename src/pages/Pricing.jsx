@@ -5,7 +5,7 @@ import { Check, Star, Tag, CheckCircle, XCircle } from 'lucide-react';
 import './Pricing.css';
 
 const VALID_PROMO_CODES = {
-  'BEE1976': 'Pro Gamer plan unlocked for free! Welcome, Boss 👑'
+  'BEELEE1976': 'Pro Gamer plan unlocked for free! Welcome, Boss 👑'
 };
 
 const Pricing = () => {
