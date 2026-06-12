@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Play, Download, Star, ExternalLink, Share2, Heart, Lock } from 'lucide-react';
 import { gamesData } from '../data/games';
 import { useAuth } from '../context/AuthContext';
+import SEO from './SEO';
 import './GamePage.css';
 
 const GamePage = () => {
@@ -26,6 +27,22 @@ const GamePage = () => {
 
   return (
     <div className="game-page-container">
+      <SEO 
+        title={game.title}
+        description={game.description || `Play ${game.title} on Hell Yeah Games.`}
+        image={game.coverUrl}
+        url={`https://hellyeah-games.com/game/${game.id}`}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "VideoGame",
+          "name": game.title,
+          "description": game.description || `Play ${game.title} on Hell Yeah Games.`,
+          "image": game.coverUrl,
+          "genre": game.category,
+          "operatingSystem": game.isWebGame ? "Web Browser" : "Windows, macOS",
+          "applicationCategory": "Game"
+        }}
+      />
       <div className="game-page-header">
         <div className="container">
           <Link to="/" className="back-link">

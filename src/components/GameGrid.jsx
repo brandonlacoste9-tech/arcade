@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 import GameCard from './GameCard';
 import { gamesData } from '../data/games';
+import SEO from './SEO';
 import './GameGrid.css';
 
 const GameGrid = () => {
@@ -27,6 +28,7 @@ const GameGrid = () => {
 
   return (
     <section className="game-section container">
+      <SEO />
       <div className="section-header">
         <h2 className="section-title">
           The <span className="text-gradient">Arcade</span>
