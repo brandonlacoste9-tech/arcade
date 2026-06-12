@@ -278,5 +278,39 @@ app.post('/api/redeem-promo', requireAuth, async (req, res) => {
   }
 });
 
+// --- HEARTBEAT ROUTE --- //
+app.post('/api/heartbeat', requireAuth, async (req, res) => {
+  try {
+    const { data: profile, error: fetchError } = await supabaseAdmin
+      .from('profiles')
+      .select('trial_seconds_remaining')
+      .eq('id', req.user.id)
+      .single();
+
+    if (fetchError || !profile) {
+      return res.status(404).json({ error: 'Profile not found' });
+    }
+
+    let remaining = profile.trial_seconds_remaining;
+    
+    if (remaining > 0) {
+      remaining = Math.max(0, remaining - 60);
+      
+      const { error: updateError } = await supabaseAdmin
+        .from('profiles')
+        .update({ trial_seconds_remaining: remaining })
+        .eq('id', req.user.id);
+        
+      if (updateError) {
+        return res.status(500).json({ error: updateError.message });
+      }
+    }
+
+    res.json({ success: true, trial_seconds_remaining: remaining });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 const PORT = process.env.PORT || 4242;
 app.listen(PORT, () => console.log(`Node server listening on port ${PORT}!`));

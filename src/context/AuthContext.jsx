@@ -8,6 +8,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null); 
   const [plan, setPlan] = useState('FREE'); 
+  const [trialSeconds, setTrialSeconds] = useState(3600);
   const [favorites, setFavorites] = useState(new Set());
   const [loading, setLoading] = useState(true);
 
@@ -40,12 +41,13 @@ export const AuthProvider = ({ children }) => {
   const fetchProfile = async (userId) => {
     const { data, error } = await supabase
       .from('profiles')
-      .select('plan')
+      .select('plan, trial_seconds_remaining')
       .eq('id', userId)
       .single();
     
     if (data) {
       setPlan(data.plan);
+      setTrialSeconds(data.trial_seconds_remaining ?? 3600);
     }
     
     const { data: favs } = await supabase
@@ -105,7 +107,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, plan, loading, login, signup, logout, favorites, toggleFavorite }}>
+    <AuthContext.Provider value={{ user, plan, trialSeconds, updateTrialSeconds: setTrialSeconds, loading, login, signup, logout, favorites, toggleFavorite }}>
       {!loading && children}
     </AuthContext.Provider>
   );

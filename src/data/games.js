@@ -185,7 +185,8 @@ export const gamesData = [
     "rating": 4.5,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/16d4b103ede245a0af3eda7193f33e41/",
-    "downloadUrl": "https://html5.gamedistribution.com/16d4b103ede245a0af3eda7193f33e41/"
+    "downloadUrl": "https://html5.gamedistribution.com/16d4b103ede245a0af3eda7193f33e41/",
+    "isFree": true
   },
   {
     "id": "5eac6df2561f49d1ac2992d130900bca",
@@ -285,7 +286,8 @@ export const gamesData = [
     "isWebGame": false,
     "gameUrl": null,
     "downloadUrl": "https://www.freetogame.com/open/spellbreak",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "2964219d4210425db1980531bf0b3010",
@@ -307,7 +309,8 @@ export const gamesData = [
     "rating": 4,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/5e98552b05034337aa50307bde4bb93d/",
-    "downloadUrl": "https://html5.gamedistribution.com/5e98552b05034337aa50307bde4bb93d/"
+    "downloadUrl": "https://html5.gamedistribution.com/5e98552b05034337aa50307bde4bb93d/",
+    "isFree": true
   },
   {
     "id": "f3a9542e779b426799867918b11fd70b",
@@ -340,7 +343,8 @@ export const gamesData = [
     "rating": 3.9,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/59c9c46de0c744e9ae989546e860d7e8/",
-    "downloadUrl": "https://html5.gamedistribution.com/59c9c46de0c744e9ae989546e860d7e8/"
+    "downloadUrl": "https://html5.gamedistribution.com/59c9c46de0c744e9ae989546e860d7e8/",
+    "isFree": true
   },
   {
     "id": "1b50250704e04f2bad5717d2704e8535",
@@ -420,7 +424,8 @@ export const gamesData = [
     "rating": 4.1,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/360e8d8783d7468ea79e578bf996d328/",
-    "downloadUrl": "https://html5.gamedistribution.com/360e8d8783d7468ea79e578bf996d328/"
+    "downloadUrl": "https://html5.gamedistribution.com/360e8d8783d7468ea79e578bf996d328/",
+    "isFree": true
   },
   {
     "id": "585",
@@ -443,7 +448,8 @@ export const gamesData = [
     "rating": 4,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/d12e86faf8f4439aa45389a10cec4592/",
-    "downloadUrl": "https://html5.gamedistribution.com/d12e86faf8f4439aa45389a10cec4592/"
+    "downloadUrl": "https://html5.gamedistribution.com/d12e86faf8f4439aa45389a10cec4592/",
+    "isFree": true
   },
   {
     "id": "43f18d2061fb44b58971b70842a6e45d",
@@ -580,7 +586,8 @@ export const gamesData = [
     "isWebGame": false,
     "gameUrl": null,
     "downloadUrl": "https://www.freetogame.com/open/black-squad",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "f5fa6153725e42e69e4b0de40d2ef9c7",
@@ -625,7 +632,8 @@ export const gamesData = [
     "isWebGame": false,
     "gameUrl": null,
     "downloadUrl": "https://www.freetogame.com/open/blockade-3d",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "6f599a127fc14957b282b0c1e594358a",
@@ -636,7 +644,8 @@ export const gamesData = [
     "rating": 4.7,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/6f599a127fc14957b282b0c1e594358a/",
-    "downloadUrl": "https://html5.gamedistribution.com/6f599a127fc14957b282b0c1e594358a/"
+    "downloadUrl": "https://html5.gamedistribution.com/6f599a127fc14957b282b0c1e594358a/",
+    "isFree": true
   },
   {
     "id": "47",
@@ -770,7 +779,8 @@ export const gamesData = [
     "isWebGame": false,
     "gameUrl": null,
     "downloadUrl": "https://www.freetogame.com/open/minion-masters",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "dfbdf129b7f442f692c36405137945ca",
@@ -1072,7 +1082,8 @@ export const gamesData = [
     "isWebGame": false,
     "gameUrl": null,
     "downloadUrl": "https://www.freetogame.com/open/spellsworn",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "4aefd2cd9aba4cae8c1e839dedfccadd",
@@ -1205,7 +1216,8 @@ export const gamesData = [
     "rating": 4.3,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/74d4566d990d431ab7e58166f3fc3d2d/",
-    "downloadUrl": "https://html5.gamedistribution.com/74d4566d990d431ab7e58166f3fc3d2d/"
+    "downloadUrl": "https://html5.gamedistribution.com/74d4566d990d431ab7e58166f3fc3d2d/",
+    "isFree": true
   },
   {
     "id": "cfa73398f23a40feaed85292ab9ae51d",
@@ -1444,7 +1456,8 @@ export const gamesData = [
     "rating": 4.9,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/f078134f39634ca78dcd4a8479a314a2/",
-    "downloadUrl": "https://html5.gamedistribution.com/f078134f39634ca78dcd4a8479a314a2/"
+    "downloadUrl": "https://html5.gamedistribution.com/f078134f39634ca78dcd4a8479a314a2/",
+    "isFree": true
   },
   {
     "id": "471",
@@ -1547,7 +1560,8 @@ export const gamesData = [
     "isWebGame": false,
     "gameUrl": null,
     "downloadUrl": "https://www.freetogame.com/open/dfiance",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "e6545905b9ed4c58bc9b01beaf6b0b3b",
@@ -1660,7 +1674,8 @@ export const gamesData = [
     "rating": 3.9,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/7ca746d71b7049df851999d2c0d554c9/",
-    "downloadUrl": "https://html5.gamedistribution.com/7ca746d71b7049df851999d2c0d554c9/"
+    "downloadUrl": "https://html5.gamedistribution.com/7ca746d71b7049df851999d2c0d554c9/",
+    "isFree": true
   },
   {
     "id": "606",
@@ -1765,7 +1780,8 @@ export const gamesData = [
     "isWebGame": true,
     "gameUrl": "https://www.freetogame.com/open/eldevin",
     "downloadUrl": "https://www.freetogame.com/open/eldevin",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "d0148861138c4ebd94045cf139a5d5eb",
@@ -1809,7 +1825,8 @@ export const gamesData = [
     "rating": 4.6,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/5af66c57218d4217812bb98762554c0d/",
-    "downloadUrl": "https://html5.gamedistribution.com/5af66c57218d4217812bb98762554c0d/"
+    "downloadUrl": "https://html5.gamedistribution.com/5af66c57218d4217812bb98762554c0d/",
+    "isFree": true
   },
   {
     "id": "534",
@@ -1868,7 +1885,8 @@ export const gamesData = [
     "isWebGame": false,
     "gameUrl": null,
     "downloadUrl": "https://www.freetogame.com/open/supervive",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "fff2efce32324f56a3e9d59ddb42cf1b",
@@ -1948,7 +1966,8 @@ export const gamesData = [
     "rating": 3.9,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/fd5ae555f42e4dac872819ed9125616c/",
-    "downloadUrl": "https://html5.gamedistribution.com/fd5ae555f42e4dac872819ed9125616c/"
+    "downloadUrl": "https://html5.gamedistribution.com/fd5ae555f42e4dac872819ed9125616c/",
+    "isFree": true
   },
   {
     "id": "21987ef4d4284d32b1bd2aef62f47782",
@@ -1959,7 +1978,8 @@ export const gamesData = [
     "rating": 4.4,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/21987ef4d4284d32b1bd2aef62f47782/",
-    "downloadUrl": "https://html5.gamedistribution.com/21987ef4d4284d32b1bd2aef62f47782/"
+    "downloadUrl": "https://html5.gamedistribution.com/21987ef4d4284d32b1bd2aef62f47782/",
+    "isFree": true
   },
   {
     "id": "339",
@@ -2177,7 +2197,8 @@ export const gamesData = [
     "isWebGame": false,
     "gameUrl": null,
     "downloadUrl": "https://www.freetogame.com/open/terminull-brigade",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "63cf93e7b28a43f2a781bafa61cf5307",
@@ -2314,7 +2335,8 @@ export const gamesData = [
     "rating": 4.3,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/381bb01b67a14e7ea30b5623eb36855e/",
-    "downloadUrl": "https://html5.gamedistribution.com/381bb01b67a14e7ea30b5623eb36855e/"
+    "downloadUrl": "https://html5.gamedistribution.com/381bb01b67a14e7ea30b5623eb36855e/",
+    "isFree": true
   },
   {
     "id": "520",
@@ -2416,7 +2438,8 @@ export const gamesData = [
     "rating": 4.6,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/c61be3d80a54455a908a44a1ea7087fb/",
-    "downloadUrl": "https://html5.gamedistribution.com/c61be3d80a54455a908a44a1ea7087fb/"
+    "downloadUrl": "https://html5.gamedistribution.com/c61be3d80a54455a908a44a1ea7087fb/",
+    "isFree": true
   },
   {
     "id": "20",
@@ -2564,7 +2587,8 @@ export const gamesData = [
     "rating": 4.7,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/308f223eb05e4b7597ba5adb96701277/",
-    "downloadUrl": "https://html5.gamedistribution.com/308f223eb05e4b7597ba5adb96701277/"
+    "downloadUrl": "https://html5.gamedistribution.com/308f223eb05e4b7597ba5adb96701277/",
+    "isFree": true
   },
   {
     "id": "96936ee47199450096ce978ca8d287e3",
@@ -2586,7 +2610,8 @@ export const gamesData = [
     "rating": 5,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/38380fc2f11e45a48c9b3809293438a5/",
-    "downloadUrl": "https://html5.gamedistribution.com/38380fc2f11e45a48c9b3809293438a5/"
+    "downloadUrl": "https://html5.gamedistribution.com/38380fc2f11e45a48c9b3809293438a5/",
+    "isFree": true
   },
   {
     "id": "9ceb5732c253496e8589ac28574e0a81",
@@ -2608,7 +2633,8 @@ export const gamesData = [
     "rating": 4.5,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/d91602efd33a46d59afe4eea53f6eacf/",
-    "downloadUrl": "https://html5.gamedistribution.com/d91602efd33a46d59afe4eea53f6eacf/"
+    "downloadUrl": "https://html5.gamedistribution.com/d91602efd33a46d59afe4eea53f6eacf/",
+    "isFree": true
   },
   {
     "id": "226",
@@ -2656,7 +2682,8 @@ export const gamesData = [
     "isWebGame": false,
     "gameUrl": null,
     "downloadUrl": "https://www.freetogame.com/open/battlerite-royale",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "679c57024b5944f584585244718e1cee",
@@ -2737,7 +2764,8 @@ export const gamesData = [
     "isWebGame": false,
     "gameUrl": null,
     "downloadUrl": "https://www.freetogame.com/open/twelve-sky-2",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "df725a3a7e6143529417611af41098cb",
@@ -2816,7 +2844,8 @@ export const gamesData = [
     "rating": 4.3,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/6fb271b6c4164d22b10ab39e632c7747/",
-    "downloadUrl": "https://html5.gamedistribution.com/6fb271b6c4164d22b10ab39e632c7747/"
+    "downloadUrl": "https://html5.gamedistribution.com/6fb271b6c4164d22b10ab39e632c7747/",
+    "isFree": true
   },
   {
     "id": "502",
@@ -2850,7 +2879,8 @@ export const gamesData = [
     "rating": 4.1,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/377ba74813184e51b6dc6d3f0d2b6e3b/",
-    "downloadUrl": "https://html5.gamedistribution.com/377ba74813184e51b6dc6d3f0d2b6e3b/"
+    "downloadUrl": "https://html5.gamedistribution.com/377ba74813184e51b6dc6d3f0d2b6e3b/",
+    "isFree": true
   },
   {
     "id": "9d9694084c2e4985bb9c46e73fe02f52",
@@ -2883,7 +2913,8 @@ export const gamesData = [
     "rating": 4.5,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/4f71c7a24a77493490846b36a944b9b5/",
-    "downloadUrl": "https://html5.gamedistribution.com/4f71c7a24a77493490846b36a944b9b5/"
+    "downloadUrl": "https://html5.gamedistribution.com/4f71c7a24a77493490846b36a944b9b5/",
+    "isFree": true
   },
   {
     "id": "272",
@@ -2985,7 +3016,8 @@ export const gamesData = [
     "isWebGame": false,
     "gameUrl": null,
     "downloadUrl": "https://www.freetogame.com/open/shop-titans",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "9258db94e74a4c979dcfa1d4e5bc57e5",
@@ -3065,7 +3097,8 @@ export const gamesData = [
     "rating": 4,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/11abb92c950f4b29a60b36037fde6951/",
-    "downloadUrl": "https://html5.gamedistribution.com/11abb92c950f4b29a60b36037fde6951/"
+    "downloadUrl": "https://html5.gamedistribution.com/11abb92c950f4b29a60b36037fde6951/",
+    "isFree": true
   },
   {
     "id": "180",
@@ -3124,7 +3157,8 @@ export const gamesData = [
     "rating": 3.9,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/f38d251c8d8a4477aabde9953d8ac971/",
-    "downloadUrl": "https://html5.gamedistribution.com/f38d251c8d8a4477aabde9953d8ac971/"
+    "downloadUrl": "https://html5.gamedistribution.com/f38d251c8d8a4477aabde9953d8ac971/",
+    "isFree": true
   },
   {
     "id": "137",
@@ -3295,7 +3329,8 @@ export const gamesData = [
     "isWebGame": false,
     "gameUrl": null,
     "downloadUrl": "https://www.freetogame.com/open/codename-cure",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "186",
@@ -3413,7 +3448,8 @@ export const gamesData = [
     "isWebGame": false,
     "gameUrl": null,
     "downloadUrl": "https://www.freetogame.com/open/marvel-snap",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "82efd9293b264d2ebf2255857a4912e7",
@@ -3446,7 +3482,8 @@ export const gamesData = [
     "rating": 4.8,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/079bd6ba427749a3bd1bae2c9c17c566/",
-    "downloadUrl": "https://html5.gamedistribution.com/079bd6ba427749a3bd1bae2c9c17c566/"
+    "downloadUrl": "https://html5.gamedistribution.com/079bd6ba427749a3bd1bae2c9c17c566/",
+    "isFree": true
   },
   {
     "id": "d2ce23ee185643db8f3831aba3971c1c",
@@ -3457,7 +3494,8 @@ export const gamesData = [
     "rating": 4.9,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/d2ce23ee185643db8f3831aba3971c1c/",
-    "downloadUrl": "https://html5.gamedistribution.com/d2ce23ee185643db8f3831aba3971c1c/"
+    "downloadUrl": "https://html5.gamedistribution.com/d2ce23ee185643db8f3831aba3971c1c/",
+    "isFree": true
   },
   {
     "id": "2f6ba268fd224e13b30c2b22bdd65606",
@@ -3625,7 +3663,8 @@ export const gamesData = [
     "rating": 3.9,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/0f62130e4f044c5087aa4a5f1713de94/",
-    "downloadUrl": "https://html5.gamedistribution.com/0f62130e4f044c5087aa4a5f1713de94/"
+    "downloadUrl": "https://html5.gamedistribution.com/0f62130e4f044c5087aa4a5f1713de94/",
+    "isFree": true
   },
   {
     "id": "e2abe24ea64a4397b00f61f2664a1ae6",
@@ -3669,7 +3708,8 @@ export const gamesData = [
     "rating": 4.4,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/e098ff2d14cf45efbc5d1896631372e5/",
-    "downloadUrl": "https://html5.gamedistribution.com/e098ff2d14cf45efbc5d1896631372e5/"
+    "downloadUrl": "https://html5.gamedistribution.com/e098ff2d14cf45efbc5d1896631372e5/",
+    "isFree": true
   },
   {
     "id": "a084e6ab82f9420bbe89bbe5c1b150fc",
@@ -3735,7 +3775,8 @@ export const gamesData = [
     "rating": 4.7,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/5083a63adc7248d8b04dd72cde2eb78c/",
-    "downloadUrl": "https://html5.gamedistribution.com/5083a63adc7248d8b04dd72cde2eb78c/"
+    "downloadUrl": "https://html5.gamedistribution.com/5083a63adc7248d8b04dd72cde2eb78c/",
+    "isFree": true
   },
   {
     "id": "322",
@@ -3747,7 +3788,8 @@ export const gamesData = [
     "isWebGame": false,
     "gameUrl": null,
     "downloadUrl": "https://www.freetogame.com/open/la-tale",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "538349ea1a3744acae7e0e029c844ce2",
@@ -3758,7 +3800,8 @@ export const gamesData = [
     "rating": 4.2,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/538349ea1a3744acae7e0e029c844ce2/",
-    "downloadUrl": "https://html5.gamedistribution.com/538349ea1a3744acae7e0e029c844ce2/"
+    "downloadUrl": "https://html5.gamedistribution.com/538349ea1a3744acae7e0e029c844ce2/",
+    "isFree": true
   },
   {
     "id": "67",
@@ -3837,7 +3880,8 @@ export const gamesData = [
     "isWebGame": false,
     "gameUrl": null,
     "downloadUrl": "https://www.freetogame.com/open/spacelords",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "f312653358ec4c959a68e43bef2b72c6",
@@ -3859,7 +3903,8 @@ export const gamesData = [
     "rating": 4,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/ded22a933ac34909a6f1029abebb8408/",
-    "downloadUrl": "https://html5.gamedistribution.com/ded22a933ac34909a6f1029abebb8408/"
+    "downloadUrl": "https://html5.gamedistribution.com/ded22a933ac34909a6f1029abebb8408/",
+    "isFree": true
   },
   {
     "id": "abb97dc299864544ad4d776045b937f1",
@@ -3960,7 +4005,8 @@ export const gamesData = [
     "rating": 4.6,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/005de4e1a9064e4191b9cd1aec496550/",
-    "downloadUrl": "https://html5.gamedistribution.com/005de4e1a9064e4191b9cd1aec496550/"
+    "downloadUrl": "https://html5.gamedistribution.com/005de4e1a9064e4191b9cd1aec496550/",
+    "isFree": true
   },
   {
     "id": "1abaea29fe734e8ba27448bc7a9c3422",
@@ -4095,7 +4141,8 @@ export const gamesData = [
     "rating": 4.6,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/a93152c0e931494987338969f804c732/",
-    "downloadUrl": "https://html5.gamedistribution.com/a93152c0e931494987338969f804c732/"
+    "downloadUrl": "https://html5.gamedistribution.com/a93152c0e931494987338969f804c732/",
+    "isFree": true
   },
   {
     "id": "96990bc0c10949bab8d1d5c844eb5b7f",
@@ -4129,7 +4176,8 @@ export const gamesData = [
     "rating": 4,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/a0dc9b2fcdb442faaaed550554ee370d/",
-    "downloadUrl": "https://html5.gamedistribution.com/a0dc9b2fcdb442faaaed550554ee370d/"
+    "downloadUrl": "https://html5.gamedistribution.com/a0dc9b2fcdb442faaaed550554ee370d/",
+    "isFree": true
   },
   {
     "id": "c00a2f81678f4497948836ac0e48fa7a",
@@ -4346,7 +4394,8 @@ export const gamesData = [
     "isWebGame": true,
     "gameUrl": "https://www.freetogame.com/open/forge-of-empires",
     "downloadUrl": "https://www.freetogame.com/open/forge-of-empires",
-    "isPopular": false
+    "isPopular": false,
+    "isFree": true
   },
   {
     "id": "5ebb9c7f2dce42369c22d2eab7c0e417",
@@ -4424,7 +4473,8 @@ export const gamesData = [
     "rating": 4.7,
     "isWebGame": true,
     "gameUrl": "https://html5.gamedistribution.com/e0250be9a0ff4355a9dccf3716128597/",
-    "downloadUrl": "https://html5.gamedistribution.com/e0250be9a0ff4355a9dccf3716128597/"
+    "downloadUrl": "https://html5.gamedistribution.com/e0250be9a0ff4355a9dccf3716128597/",
+    "isFree": true
   },
   {
     "id": "7b100acf319e45968794e858cdda392f",

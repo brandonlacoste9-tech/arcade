@@ -89,6 +89,19 @@ const GamePage = () => {
                   </div>
                 </div>
               )
+            ) : game.isFree ? (
+              <div className="downloadable-prompt">
+                <img src={game.coverUrl} alt={game.title} className="prompt-bg" />
+                <div className="prompt-overlay">
+                  <Play size={48} className="prompt-icon text-gradient" />
+                  <h2>Free Trial Game</h2>
+                  <p>You can play this game for free for 1 hour!</p>
+                  <button className="btn btn-primary btn-lg" onClick={() => navigate(`/play/${game.id}`)}>
+                    <Play size={20} fill="currentColor" />
+                    Enter Theater Mode to Play
+                  </button>
+                </div>
+              </div>
             ) : (
               <div className="downloadable-prompt paywall-prompt">
                 <img src={game.coverUrl} alt={game.title} className="prompt-bg" />

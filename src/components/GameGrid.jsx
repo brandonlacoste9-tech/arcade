@@ -75,6 +75,20 @@ const GameGrid = () => {
         // Netflix-style Row View (The 'All' tab without active search)
         <div className="game-rows-container">
           
+          {/* Free To Play Row */}
+          <div className="game-row-section animate-fade-in" style={{ marginBottom: '1rem' }}>
+            <div className="game-row-header">
+              <h3><span className="text-gradient" style={{ background: 'linear-gradient(135deg, #00e5ff, #ff0080)', WebkitBackgroundClip: 'text' }}>Free To Play</span> This Week</h3>
+            </div>
+            <div className="game-row" style={{ paddingBottom: '2rem' }}>
+              {searchedGames.filter(g => g.isFree).map(game => (
+                <div key={game.id} className="game-row-item">
+                  <GameCard game={game} />
+                </div>
+              ))}
+            </div>
+          </div>
+
           {/* Popular Games Row */}
           <div className="game-row-section animate-fade-in" style={{ marginBottom: '1rem' }}>
             <div className="game-row-header">
