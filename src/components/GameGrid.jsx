@@ -10,7 +10,7 @@ const GameGrid = () => {
   const [searchQuery, setSearchQuery] = useState('');
   
   const categories = ['Action', 'Strategy', 'Puzzle', 'Arcade', 'Cards', 'Bubble Shooters'];
-  const filters = ['All', 'Popular', ...categories];
+  const filters = ['All', 'Free', 'Popular', ...categories];
 
   // First filter by search query
   const searchedGames = searchQuery.trim() 
@@ -24,7 +24,9 @@ const GameGrid = () => {
     ? searchedGames
     : activeFilter === 'Popular'
       ? searchedGames.filter(game => game.isPopular)
-      : searchedGames.filter(game => game.category === activeFilter);
+      : activeFilter === 'Free'
+        ? searchedGames.filter(game => game.isFree)
+        : searchedGames.filter(game => game.category === activeFilter);
 
   return (
     <section className="game-section container">
@@ -79,6 +81,7 @@ const GameGrid = () => {
           <div className="game-row-section animate-fade-in" style={{ marginBottom: '1rem' }}>
             <div className="game-row-header">
               <h3><span className="text-gradient" style={{ background: 'linear-gradient(135deg, #00e5ff, #ff0080)', WebkitBackgroundClip: 'text' }}>Free To Play</span> This Week</h3>
+              <button className="view-all-btn" onClick={() => setActiveFilter('Free')}>View All</button>
             </div>
             <div className="game-row" style={{ paddingBottom: '2rem' }}>
               {searchedGames.filter(g => g.isFree).map(game => (
