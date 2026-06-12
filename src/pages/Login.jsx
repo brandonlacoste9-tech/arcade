@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Gamepad2, Eye, EyeOff } from 'lucide-react';
 import './Auth.css';
 
 const Login = () => {
-  const [isSignup, setIsSignup] = useState(false);
+  const location = useLocation();
+  const [isSignup, setIsSignup] = useState(location.pathname === '/signup');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');

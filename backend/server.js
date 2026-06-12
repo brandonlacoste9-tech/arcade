@@ -43,17 +43,20 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  // Handle successful checkout session
+  // Handle successful checkout session -> upgrade to PRO and store Stripe IDs
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object;
     const userId = session.client_reference_id;
 
     if (userId) {
       console.log(`Upgrading user ${userId} to PRO...`);
-      // Update the user's profile in Supabase to 'PRO'
       const { error } = await supabaseAdmin
         .from('profiles')
-        .update({ plan: 'PRO' })
+        .update({
+          plan: 'PRO',
+          stripe_customer_id: session.customer,
+          stripe_subscription_id: session.subscription,
+        })
         .eq('id', userId);
 
       if (error) {
@@ -61,6 +64,23 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
         return res.status(500).end();
       }
       console.log(`User ${userId} successfully upgraded!`);
+    }
+  }
+
+  // Handle cancellation / non-renewal -> downgrade to FREE.
+  // Match on the stored subscription id so we don't rely on client_reference_id
+  // (which is not present on subscription events).
+  if (event.type === 'customer.subscription.deleted') {
+    const subscription = event.data.object;
+    console.log(`Subscription ${subscription.id} canceled, downgrading user...`);
+    const { error } = await supabaseAdmin
+      .from('profiles')
+      .update({ plan: 'FREE', stripe_subscription_id: null })
+      .eq('stripe_subscription_id', subscription.id);
+
+    if (error) {
+      console.error('Error downgrading Supabase profile:', error);
+      return res.status(500).end();
     }
   }
 
@@ -83,11 +103,15 @@ app.post('/verify-session', async (req, res) => {
     
     if (session.payment_status === 'paid') {
       const userId = session.client_reference_id;
-      
-      // Update Supabase to PRO
+
+      // Update Supabase to PRO and persist Stripe IDs (so cancellations work).
       const { error } = await supabaseAdmin
         .from('profiles')
-        .update({ plan: 'PRO' })
+        .update({
+          plan: 'PRO',
+          stripe_customer_id: session.customer,
+          stripe_subscription_id: session.subscription,
+        })
         .eq('id', userId);
 
       if (error) throw error;

@@ -70,20 +70,8 @@ export const AuthProvider = ({ children }) => {
     await supabase.auth.signOut();
   };
 
-  const subscribe = async () => {
-    if (!user) return;
-    const { error } = await supabase
-      .from('profiles')
-      .update({ plan: 'PRO' })
-      .eq('id', user.id);
-    
-    if (!error) {
-      setPlan('PRO');
-    }
-  };
-
   return (
-    <AuthContext.Provider value={{ user, plan, loading, login, signup, logout, subscribe }}>
+    <AuthContext.Provider value={{ user, plan, loading, login, signup, logout }}>
       {!loading && children}
     </AuthContext.Provider>
   );
