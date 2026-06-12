@@ -3,11 +3,26 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 
 // Load environment variables from .env file
 dotenv.config();
 
 const app = express();
+
+// Security Headers
+app.use(helmet());
+
+// Rate Limiting (100 requests per 15 minutes per IP)
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, 
+  max: 100, 
+  standardHeaders: true, 
+  legacyHeaders: false, 
+});
+app.use(limiter);
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // Supabase Admin Client (Bypasses RLS)
@@ -54,7 +69,9 @@ app.post('/webhook', express.raw({ type: 'application/json' }), async (req, res)
 
 // Middleware for parsing JSON (for all other routes)
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL || 'http://localhost:5173'
+}));
 
 // Route to verify a checkout session (Easier than Webhooks for Local Testing)
 app.post('/verify-session', async (req, res) => {
@@ -129,8 +146,41 @@ app.post('/create-checkout-session', async (req, res) => {
 
 // --- ADMIN ROUTES --- //
 
+// Middleware to verify Supabase JWT and check if user is an admin
+const requireAdmin = async (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'Missing or invalid authorization header' });
+  }
+
+  const token = authHeader.split(' ')[1];
+
+  try {
+    const { data: { user }, error: authError } = await supabaseAdmin.auth.getUser(token);
+    
+    if (authError || !user) {
+      return res.status(401).json({ error: 'Invalid or expired token' });
+    }
+
+    const { data: profile, error: profileError } = await supabaseAdmin
+      .from('profiles')
+      .select('role')
+      .eq('id', user.id)
+      .single();
+
+    if (profileError || profile?.role !== 'admin') {
+      return res.status(403).json({ error: 'Forbidden: Admin access required' });
+    }
+
+    req.user = user;
+    next();
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 // Fetch all users
-app.get('/api/users', async (req, res) => {
+app.get('/api/users', requireAdmin, async (req, res) => {
   try {
     const { data, error } = await supabaseAdmin
       .from('profiles')
@@ -145,7 +195,7 @@ app.get('/api/users', async (req, res) => {
 });
 
 // Update user plan
-app.post('/api/users/:id/plan', async (req, res) => {
+app.post('/api/users/:id/plan', requireAdmin, async (req, res) => {
   const { id } = req.params;
   const { plan } = req.body;
   try {

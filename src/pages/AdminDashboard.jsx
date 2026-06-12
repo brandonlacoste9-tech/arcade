@@ -33,7 +33,12 @@ const AdminDashboard = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await fetch('http://localhost:4242/api/users');
+      const { data: { session } } = await supabase.auth.getSession();
+      const res = await fetch('http://localhost:4242/api/users', {
+        headers: {
+          'Authorization': `Bearer ${session?.access_token}`
+        }
+      });
       const data = await res.json();
       setUsersList(data || []);
     } catch (err) {
@@ -45,9 +50,13 @@ const AdminDashboard = () => {
   const togglePlan = async (userId, currentPlan) => {
     const newPlan = currentPlan === 'PRO' ? 'FREE' : 'PRO';
     try {
+      const { data: { session } } = await supabase.auth.getSession();
       const res = await fetch(`http://localhost:4242/api/users/${userId}/plan`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session?.access_token}`
+        },
         body: JSON.stringify({ plan: newPlan })
       });
       if (res.ok) {
