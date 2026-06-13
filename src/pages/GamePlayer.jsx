@@ -146,7 +146,7 @@ const GamePlayer = () => {
           <div className="paywall-overlay">
             <div className="paywall-content">
               <h2>Time's Up! ⏰</h2>
-              <p>Your 1-hour free trial has expired.</p>
+              <p>Your 1.5-hour free trial has expired.</p>
               <button className="btn btn-primary btn-lg mt-4" onClick={() => navigate('/pricing')}>
                 Subscribe to Pro Gamer
               </button>

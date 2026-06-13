@@ -8,7 +8,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null); 
   const [plan, setPlan] = useState('FREE'); 
-  const [trialSeconds, setTrialSeconds] = useState(3600);
+  const [trialSeconds, setTrialSeconds] = useState(5400);
   const [favorites, setFavorites] = useState(new Set());
   const [loading, setLoading] = useState(true);
 
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
     
     if (data) {
       setPlan(data.plan);
-      setTrialSeconds(data.trial_seconds_remaining ?? 3600);
+      setTrialSeconds(data.trial_seconds_remaining ?? 5400);
     }
     
     const { data: favs } = await supabase
