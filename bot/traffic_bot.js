@@ -1,5 +1,11 @@
 import 'dotenv/config';
 import { gamesData } from '../src/data/games.js';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // If you create a Discord Webhook, place the URL here!
 // e.g. "https://discord.com/api/webhooks/12345/abcde"
@@ -52,12 +58,41 @@ const postToDiscord = async (postData) => {
     return;
   }
 
+  const promoVideoPath = path.join(__dirname, 'promo.mp4');
+  const promoImagePath = path.join(__dirname, 'promo.png');
+
+  let fileToAttach = null;
+  let fileName = null;
+
+  if (fs.existsSync(promoVideoPath)) {
+    fileToAttach = promoVideoPath;
+    fileName = 'promo.mp4';
+  } else if (fs.existsSync(promoImagePath)) {
+    fileToAttach = promoImagePath;
+    fileName = 'promo.png';
+  }
+
   try {
-    const res = await fetch(DISCORD_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(postData)
-    });
+    let res;
+    if (fileToAttach) {
+      const formData = new FormData();
+      const buffer = fs.readFileSync(fileToAttach);
+      const blob = new Blob([buffer]);
+      formData.append('file', blob, fileName);
+      formData.append('payload_json', JSON.stringify(postData));
+
+      res = await fetch(DISCORD_WEBHOOK_URL, {
+        method: 'POST',
+        body: formData
+      });
+    } else {
+      res = await fetch(DISCORD_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(postData)
+      });
+    }
+
     if (res.ok) {
       console.log(`[BOT] Successfully posted marketing for ${postData.embeds[0].title}`);
     } else {
