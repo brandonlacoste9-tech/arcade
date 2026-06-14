@@ -1,6 +1,12 @@
 import 'dotenv/config';
 import { TwitterApi } from 'twitter-api-v2';
 import { gamesData } from '../src/data/games.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Requires Twitter API keys to be set in your .env file
 const client = new TwitterApi({
@@ -52,7 +58,24 @@ async function runBot() {
       const tweetText = generateMarketingPost();
       console.log(`\n📝 Attempting to post Tweet:\n${tweetText}\n`);
       
-      const { data: createdTweet } = await rwClient.v2.tweet(tweetText);
+      const promoPath = path.join(__dirname, 'promo.png');
+      let mediaId = null;
+
+      try {
+        if (fs.existsSync(promoPath)) {
+          console.log('🖼️ Uploading promo image...');
+          mediaId = await client.v1.uploadMedia(promoPath);
+        }
+      } catch (mediaError) {
+        console.error('⚠️ Failed to upload media, falling back to text-only:', mediaError.message);
+      }
+
+      const tweetPayload = { text: tweetText };
+      if (mediaId) {
+        tweetPayload.media = { media_ids: [mediaId] };
+      }
+      
+      const { data: createdTweet } = await rwClient.v2.tweet(tweetPayload);
       
       console.log(`✅ Successfully posted Tweet! ID: ${createdTweet.id}`);
     } catch (error) {
