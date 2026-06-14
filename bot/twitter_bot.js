@@ -58,13 +58,17 @@ async function runBot() {
       const tweetText = generateMarketingPost();
       console.log(`\n📝 Attempting to post Tweet:\n${tweetText}\n`);
       
-      const promoPath = path.join(__dirname, 'promo.png');
+      const promoVideoPath = path.join(__dirname, 'promo.mp4');
+      const promoImagePath = path.join(__dirname, 'promo.png');
       let mediaId = null;
 
       try {
-        if (fs.existsSync(promoPath)) {
+        if (fs.existsSync(promoVideoPath)) {
+          console.log('🎥 Uploading promo video (this might take a few seconds)...');
+          mediaId = await client.v1.uploadMedia(promoVideoPath);
+        } else if (fs.existsSync(promoImagePath)) {
           console.log('🖼️ Uploading promo image...');
-          mediaId = await client.v1.uploadMedia(promoPath);
+          mediaId = await client.v1.uploadMedia(promoImagePath);
         }
       } catch (mediaError) {
         console.error('⚠️ Failed to upload media, falling back to text-only:', mediaError.message);
