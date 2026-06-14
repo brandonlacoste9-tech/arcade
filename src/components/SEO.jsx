@@ -1,10 +1,12 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
+import { getBranding } from '../config/branding';
 
 const SEO = ({ title, description, url, image, type = 'website', schema }) => {
-  const siteName = 'HELL YEAH GAMES';
-  const defaultTitle = '🔥 HELL YEAH GAMES — Play Now';
-  const defaultDescription = "Hell Yeah Games — 860+ of the world's best casual & hardcore browser games. One platform. Zero compromises.";
+  const { t } = useTranslation();
+  const { name: siteName, title: defaultTitle } = getBranding();
+  const defaultDescription = t('seo.defaultDescription');
   const defaultImage = 'https://hellyeah-games.com/seo-banner.jpg';
   const defaultUrl = 'https://hellyeah-games.com';
 

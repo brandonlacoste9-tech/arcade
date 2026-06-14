@@ -1,22 +1,33 @@
 import { Play, ArrowRight, MessageSquare } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { getBranding } from '../config/branding';
 import './HeroSection.css';
 
 const HeroSection = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const brand = getBranding();
 
   return (
     <section className="hero">
-      <div className="hero-background"></div>
+      <div className="hero-background" style={{ backgroundImage: brand.heroBackground }}></div>
       <div className="hero-particles"></div>
       
       <div className="container hero-container">
         <div className="hero-content animate-fade-in">
+          {brand.domain === 'cyborggamers.com' ? (
+            <h1 className="hero-title" style={{ fontFamily: 'monospace', color: '#00f3ff', textShadow: '0 0 20px #00f3ff', textTransform: 'uppercase' }}>
+              {brand.heroTitle}
+            </h1>
+          ) : (
+            <h1 className="hero-title">
+              {brand.heroTitle}
+            </h1>
+          )}
 
           <p className="hero-subtitle">
-            OVER 800+ OF YOUR FAVOURITE GAMES. ALL IN ONE PLACE. ANYTIME. EVERYWHERE. FREE REGISTRATION. START PLAYING.
+            {brand.heroSubtitle}
           </p>
           
           <div className="hero-actions">

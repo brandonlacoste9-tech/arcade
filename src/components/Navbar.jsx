@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { useTranslation } from 'react-i18next';
+import { getBranding } from '../config/branding';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -14,6 +15,7 @@ const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(false);
+  const brand = getBranding();
 
   useEffect(() => {
     if (user) {
@@ -41,7 +43,11 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? 'navbar-scrolled glass-panel' : ''}`}>
       <div className="container navbar-container">
         <Link to="/" className="navbar-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-          <img src="/logo.png" alt="Hell Yeah Games" style={{ height: '40px', objectFit: 'contain' }} />
+          {brand.domain === 'cyborggamers.com' ? (
+            <span style={{ fontFamily: 'monospace', fontWeight: 'bold', fontSize: '1.5rem', color: '#00f3ff', letterSpacing: '2px' }}>{brand.logoText}</span>
+          ) : (
+            <img src="/logo.png" alt={brand.name} style={{ height: '40px', objectFit: 'contain' }} />
+          )}
         </Link>
 
         <div className="navbar-links desktop-only">
