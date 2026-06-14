@@ -1,4 +1,4 @@
-import { Play, ArrowRight } from 'lucide-react';
+import { Play, ArrowRight, MessageSquare } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './HeroSection.css';
@@ -28,6 +28,10 @@ const HeroSection = () => {
               Browse Catalog
               <ArrowRight size={20} />
             </button>
+            <a href="https://discord.gg/v33kZn6c" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-lg" style={{ borderColor: '#5865F2', color: '#5865F2', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <MessageSquare size={20} />
+              Join Discord
+            </a>
           </div>
           
           <div className="hero-stats glass-panel">

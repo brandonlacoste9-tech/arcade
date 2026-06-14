@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Gamepad2, Menu, X, Search, User, Globe, Sun, Moon } from 'lucide-react';
+import { Gamepad2, Menu, X, Search, User, Globe, Sun, Moon, MessageSquare } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
@@ -48,6 +48,9 @@ const Navbar = () => {
           <Link to="/" className="nav-link active">{t('nav.home')}</Link>
           <Link to="/games" className="nav-link">{t('nav.games')}</Link>
           <Link to="/categories" className="nav-link">{t('nav.categories')}</Link>
+          <a href="https://discord.gg/v33kZn6c" target="_blank" rel="noopener noreferrer" className="nav-link" style={{ color: '#5865F2', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+            <MessageSquare size={16} /> Discord
+          </a>
           {user && <Link to="/profile" className="nav-link" style={{ color: 'var(--primary-color)', fontWeight: 'bold' }}>Profile</Link>}
           {user && <Link to="/my-library" className="nav-link" style={{ color: 'var(--primary-color)' }}>My Library</Link>}
           <Link to="/about" className="nav-link">{t('nav.about')}</Link>
@@ -110,6 +113,7 @@ const Navbar = () => {
           <Link to="/" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>{t('nav.home')}</Link>
           <Link to="/games" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>{t('nav.games')}</Link>
           <Link to="/categories" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>{t('nav.categories')}</Link>
+          <a href="https://discord.gg/v33kZn6c" target="_blank" rel="noopener noreferrer" className="mobile-nav-link" style={{ color: '#5865F2', fontWeight: 'bold' }}>Discord Community</a>
           {user && <Link to="/profile" className="mobile-nav-link" style={{ color: 'var(--primary-color)', fontWeight: 'bold' }} onClick={() => setMobileMenuOpen(false)}>Profile</Link>}
           {user && <Link to="/my-library" className="mobile-nav-link" style={{ color: 'var(--primary-color)' }} onClick={() => setMobileMenuOpen(false)}>My Library</Link>}
           <div className="mobile-nav-link" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'inherit' }}>
