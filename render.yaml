@@ -1,0 +1,28 @@
+services:
+  # The Stripe Payment Backend
+  - type: web
+    name: arcade-backend
+    env: node
+    buildCommand: npm install
+    startCommand: node backend/server.js
+    envVars:
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: VITE_SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: CLIENT_URL
+        sync: false
+    autoDeploy: true
+
+  # The Automated Discord Traffic Bot
+  - type: worker
+    name: arcade-traffic-bot
+    env: node
+    buildCommand: npm install
+    startCommand: npm run bot
+    envVars:
+      - key: DISCORD_WEBHOOK_URL
+        sync: false
+    autoDeploy: true
