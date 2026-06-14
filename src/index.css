@@ -2,19 +2,19 @@
 
 :root {
   /* Color Palette */
-  --bg-color: #0a0a0a;
-  --surface-color: #141414;
-  --surface-color-glass: rgba(20, 20, 20, 0.7);
+  --bg-color: #050505;
+  --surface-color: #111111;
+  --surface-color-glass: rgba(17, 17, 17, 0.7);
   
-  --primary-color: #ff2a2a;
-  --primary-color-hover: #ff4d4d;
-  --secondary-color: #8d99ae;
+  --primary-color: #ff007f;
+  --primary-color-hover: #ff3399;
+  --secondary-color: #8a2be2;
   
-  --text-primary: #f8f9fa;
-  --text-secondary: #adb5bd;
-  --text-muted: #6c757d;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --text-muted: #666666;
 
-  --accent-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  --accent-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color), #ff8a00);
   
   /* Typography */
   --font-heading: 'Outfit', sans-serif;

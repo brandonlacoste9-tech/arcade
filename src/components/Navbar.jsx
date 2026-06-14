@@ -41,22 +41,7 @@ const Navbar = () => {
     <nav className={`navbar ${scrolled ? 'navbar-scrolled glass-panel' : ''}`}>
       <div className="container navbar-container">
         <Link to="/" className="navbar-logo" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-          <span className="logo-text" style={{
-            fontFamily: 'var(--font-heading)',
-            fontWeight: 900,
-            fontSize: '1.4rem',
-            letterSpacing: '-0.5px',
-            lineHeight: 1,
-            background: 'linear-gradient(135deg, #ff2a2a, #ff4d4d, #8d99ae)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            textTransform: 'uppercase',
-            filter: 'drop-shadow(0 0 12px rgba(255, 42, 42, 0.5))',
-          }}>
-            GAMERS<br/>
-            <span style={{ fontSize: '0.75rem', letterSpacing: '4px', opacity: 0.9 }}>CYBORG</span>
-          </span>
+          <img src="/logo.png" alt="Hell Yeah Games" style={{ height: '40px', objectFit: 'contain' }} />
         </Link>
 
         <div className="navbar-links desktop-only">
