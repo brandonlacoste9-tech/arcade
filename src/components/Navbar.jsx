@@ -63,6 +63,7 @@ const Navbar = () => {
           <Link to="/" className="nav-link active">{t('nav.home')}</Link>
           <Link to="/games" className="nav-link">{t('nav.games')}</Link>
           <Link to="/categories" className="nav-link">{t('nav.categories')}</Link>
+          {user && <Link to="/profile" className="nav-link" style={{ color: 'var(--primary-color)', fontWeight: 'bold' }}>Profile</Link>}
           {user && <Link to="/my-library" className="nav-link" style={{ color: 'var(--primary-color)' }}>My Library</Link>}
           <Link to="/about" className="nav-link">{t('nav.about')}</Link>
         </div>
@@ -124,6 +125,7 @@ const Navbar = () => {
           <Link to="/" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>{t('nav.home')}</Link>
           <Link to="/games" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>{t('nav.games')}</Link>
           <Link to="/categories" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>{t('nav.categories')}</Link>
+          {user && <Link to="/profile" className="mobile-nav-link" style={{ color: 'var(--primary-color)', fontWeight: 'bold' }} onClick={() => setMobileMenuOpen(false)}>Profile</Link>}
           {user && <Link to="/my-library" className="mobile-nav-link" style={{ color: 'var(--primary-color)' }} onClick={() => setMobileMenuOpen(false)}>My Library</Link>}
           <div className="mobile-nav-link" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'inherit' }}>
             <Globe size={18} />
