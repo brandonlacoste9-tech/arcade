@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { gamesData } from '../src/data/games.js';
 
 // If you create a Discord Webhook, place the URL here!
