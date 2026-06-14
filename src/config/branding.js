@@ -9,7 +9,7 @@ export const getBranding = () => {
       logoText: 'CYBORG GAMERS',
       heroTitle: 'GAMERS CYBORG',
       heroSubtitle: 'OVER 800+ OF YOUR FAVOURITE GAMES. ALL IN ONE PLACE. ANYTIME. EVERYWHERE. FREE REGISTRATION. START PLAYING.',
-      heroBackground: '/cyborg-bg.jpg', // We will copy the image to this path
+      heroBackground: 'linear-gradient(to right, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.8) 40%, rgba(10, 10, 10, 0.4) 100%), url(/cyborg-bg.jpg)',
       domain: 'cyborggamers.com',
       theme: 'cyberpunk', // Custom theme key we can use for CSS if needed
     };
