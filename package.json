@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node generate-sitemap.js && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "build": "npm run seo && vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "seo": "node generate-sitemap.js",
+    "bot": "node bot/traffic_bot.js"
   },
   "dependencies": {
     "@stripe/stripe-js": "^9.8.0",
