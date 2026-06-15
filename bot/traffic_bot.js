@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import { gamesData } from '../src/data/games.js';
+import { newsData } from '../../digital-newspaper/src/data/news.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -7,30 +8,23 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// If you create a Discord Webhook, place the URL here!
-// e.g. "https://discord.com/api/webhooks/12345/abcde"
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL || null;
-
-const BASE_URL = 'https://hellyeah-games.com';
-
-const HYPE_MESSAGES = [
-  "🔥 Can you beat the high score? Play [TITLE] right now on Hell Yeah Games!",
-  "🚨 New obsession unlocked! Dive into [TITLE] for free right here:",
-  "🎮 Looking for something new to play? Check out [TITLE]. First 1.5 hours are entirely on us!",
-  "⚡ Start your weekend right. Play [TITLE] instantly in your browser right now:",
-  "🏆 Only 1% of players can master [TITLE]. Are you one of them? Prove it here:"
-];
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-const generateMarketingPost = () => {
-  // Pick a random game
-  const randomGame = gamesData[Math.floor(Math.random() * gamesData.length)];
+const generateHellYeahPost = () => {
+  const HYPE_MESSAGES = [
+    "🔥 Can you beat the high score? Play [TITLE] right now on Hell Yeah Games!",
+    "🚨 New obsession unlocked! Dive into [TITLE] for free right here:",
+    "🎮 Looking for something new to play? Check out [TITLE]. First 1.5 hours are entirely on us!",
+    "⚡ Start your weekend right. Play [TITLE] instantly in your browser right now:",
+    "🏆 Only 1% of players can master [TITLE]. Are you one of them? Prove it here:"
+  ];
   
-  // Pick a random hype message
+  const randomGame = gamesData[Math.floor(Math.random() * gamesData.length)];
   const randomHype = HYPE_MESSAGES[Math.floor(Math.random() * HYPE_MESSAGES.length)];
   const content = randomHype.replace('[TITLE]', `**${randomGame.title}**`);
-  const link = `${BASE_URL}/game/${randomGame.id}`;
+  const link = `https://hellyeah-games-inc.com/game/${randomGame.id}`;
 
   return {
     content: `${content}\n\n👉 Play now: ${link}`,
@@ -39,10 +33,68 @@ const generateMarketingPost = () => {
         title: randomGame.title,
         description: randomGame.description.substring(0, 200) + '...',
         url: link,
-        color: 16716947, // Neon Pink (Decimal)
-        image: {
-          url: randomGame.coverUrl
-        }
+        color: 16744960, // Orange
+        image: { url: randomGame.coverUrl }
+      }
+    ]
+  };
+};
+
+const generateArcadePost = () => {
+  const ARCADE_MESSAGES = [
+    "💎 Ready for the premium experience? Play [TITLE] AD-FREE on The Arcade!",
+    "🕹️ No ads. No interruptions. Experience [TITLE] the way it was meant to be played.",
+    "🚀 Unlock [TITLE] instantly with an Arcade Subscription. Join the elite today!",
+    "⚡ Seamless, uninterrupted gaming. Drop into [TITLE] instantly on The Arcade."
+  ];
+
+  const randomGame = gamesData[Math.floor(Math.random() * gamesData.length)];
+  const randomHype = ARCADE_MESSAGES[Math.floor(Math.random() * ARCADE_MESSAGES.length)];
+  const content = randomHype.replace('[TITLE]', `**${randomGame.title}**`);
+  const link = `https://hellyeah-games.com/play/${randomGame.id}`;
+
+  return {
+    content: `${content}\n\n👉 Experience Premium: ${link}`,
+    embeds: [
+      {
+        title: randomGame.title,
+        description: randomGame.description.substring(0, 200) + '...',
+        url: link,
+        color: 65416, // Cyborg Neon Green
+        image: { url: randomGame.coverUrl }
+      }
+    ]
+  };
+};
+
+const generateHackerMediaPost = () => {
+  const NEWS_MESSAGES = [
+    "📰 BREAKING: [TITLE]",
+    "💻 TECH UPDATE: Did you catch this? [TITLE]",
+    "🔍 DEEP DIVE: [TITLE]. Read the full report on Hacker Media.",
+    "🌐 LATEST FROM THE WIRE: [TITLE]"
+  ];
+
+  const randomNews = newsData[Math.floor(Math.random() * newsData.length)];
+  const randomHype = NEWS_MESSAGES[Math.floor(Math.random() * NEWS_MESSAGES.length)];
+  const content = randomHype.replace('[TITLE]', `**${randomNews.title}**`);
+  const link = `https://www.hackermedia.ca/article/${randomNews.id}`;
+
+  // Fix image URL if it's a relative asset URL
+  let imageUrl = randomNews.imageUrl;
+  if (imageUrl && imageUrl.startsWith('/')) {
+    imageUrl = `https://www.hackermedia.ca${imageUrl}`;
+  }
+
+  return {
+    content: `${content}\n\n👉 Read More: ${link}`,
+    embeds: [
+      {
+        title: randomNews.title,
+        description: randomNews.summary,
+        url: link,
+        color: 15088198, // Hacker Media Red
+        image: { url: imageUrl }
       }
     ]
   };
@@ -51,50 +103,23 @@ const generateMarketingPost = () => {
 const postToDiscord = async (postData) => {
   if (!DISCORD_WEBHOOK_URL) {
     console.log("=========================================");
-    console.log("[SIMULATED BOT POST] Discord Webhook not configured.");
+    console.log("[SIMULATED EMPIRE BOT POST]");
     console.log(postData.content);
-    console.log(`IMAGE URL: ${postData.embeds[0].image.url}`);
+    console.log(`EMBED COLOR: ${postData.embeds[0].color}`);
+    console.log(`IMAGE URL: ${postData.embeds[0].image?.url}`);
     console.log("=========================================\n");
     return;
   }
 
-  const promoVideoPath = path.join(__dirname, 'promo.mp4');
-  const promoImagePath = path.join(__dirname, 'promo.png');
-
-  let fileToAttach = null;
-  let fileName = null;
-
-  if (fs.existsSync(promoVideoPath)) {
-    fileToAttach = promoVideoPath;
-    fileName = 'promo.mp4';
-  } else if (fs.existsSync(promoImagePath)) {
-    fileToAttach = promoImagePath;
-    fileName = 'promo.png';
-  }
-
   try {
-    let res;
-    if (fileToAttach) {
-      const formData = new FormData();
-      const buffer = fs.readFileSync(fileToAttach);
-      const blob = new Blob([buffer]);
-      formData.append('file', blob, fileName);
-      formData.append('payload_json', JSON.stringify(postData));
-
-      res = await fetch(DISCORD_WEBHOOK_URL, {
-        method: 'POST',
-        body: formData
-      });
-    } else {
-      res = await fetch(DISCORD_WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(postData)
-      });
-    }
+    const res = await fetch(DISCORD_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(postData)
+    });
 
     if (res.ok) {
-      console.log(`[BOT] Successfully posted marketing for ${postData.embeds[0].title}`);
+      console.log(`[BOT] Successfully broadcasted to Discord: ${postData.embeds[0].title}`);
     } else {
       console.error(`[BOT] Failed to post: ${res.statusText}`);
     }
@@ -104,25 +129,30 @@ const postToDiscord = async (postData) => {
 };
 
 const runBot = async () => {
-  console.log("🚀 Empire Traffic Bot Started!");
+  console.log("🚀 EMPIRE MARKETING BOT STARTED!");
   
-  // If run with --test flag, run once immediately
   if (process.argv.includes('--test')) {
-    console.log("Running test burst...");
-    const post = generateMarketingPost();
-    await postToDiscord(post);
+    console.log("Running test burst for all platforms...");
+    await postToDiscord(generateHellYeahPost());
+    await sleep(2000);
+    await postToDiscord(generateArcadePost());
+    await sleep(2000);
+    await postToDiscord(generateHackerMediaPost());
     return;
   }
 
-  // Otherwise run continuously (e.g., every 4 hours = 14400000 ms)
   const INTERVAL_MS = 4 * 60 * 60 * 1000;
-  
-  console.log(`Bot will automatically market a game every 4 hours.`);
+  console.log(`Bot will randomly promote a platform every 4 hours.`);
   
   while (true) {
-    const post = generateMarketingPost();
+    const choice = Math.floor(Math.random() * 3);
+    let post;
+    
+    if (choice === 0) post = generateHellYeahPost();
+    else if (choice === 1) post = generateArcadePost();
+    else post = generateHackerMediaPost();
+
     await postToDiscord(post);
-    // Wait 4 hours
     await sleep(INTERVAL_MS);
   }
 };
