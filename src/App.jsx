@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from './components/Navbar';
+import GlobalToast from './components/GlobalToast';
 import HeroSection from './components/HeroSection';
 import GameGrid from './components/GameGrid';
 import GamePage from './components/GamePage';
@@ -18,6 +19,7 @@ function App() {
   return (
     <>
       <Navbar />
+      <GlobalToast />
       <main>
         <Routes>
           <Route path="/" element={

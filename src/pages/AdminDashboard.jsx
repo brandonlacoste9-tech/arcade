@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { Shield, ShieldAlert, CheckCircle, ArrowLeft } from 'lucide-react';
+import { Shield, ShieldAlert, CheckCircle, ArrowLeft, Radio } from 'lucide-react';
 import { supabase } from '../supabaseClient';
 import './AdminDashboard.css';
 
@@ -11,6 +11,8 @@ const AdminDashboard = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [usersList, setUsersList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [broadcastMsg, setBroadcastMsg] = useState('');
+  const [broadcastPriority, setBroadcastPriority] = useState('info');
 
   useEffect(() => {
     if (!user) {
@@ -69,6 +71,21 @@ const AdminDashboard = () => {
     }
   };
 
+  const dispatchBroadcast = async () => {
+    if (!broadcastMsg.trim()) return;
+    try {
+      const { error } = await supabase.from('broadcasts').insert([
+        { message: broadcastMsg, priority: broadcastPriority, is_active: true }
+      ]);
+      if (error) throw error;
+      setBroadcastMsg('');
+      alert('Broadcast Dispatched!');
+    } catch (err) {
+      console.error('Broadcast failed:', err);
+      alert('Broadcast failed');
+    }
+  };
+
   if (loading || !isAdmin) return <div className="container" style={{paddingTop: '100px', textAlign: 'center'}}>Loading Secure Area...</div>;
 
   return (
@@ -92,6 +109,42 @@ const AdminDashboard = () => {
             {usersList.filter(u => u.plan === 'PRO').length}
           </p>
         </div>
+      </div>
+
+      <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem' }}>
+        <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', color: '#00f3ff' }}>
+          <Radio size={24} /> Broadcast Command Center
+        </h2>
+        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          <input 
+            type="text" 
+            placeholder="Enter broadcast message..." 
+            className="input-field" 
+            style={{ flex: 1, minWidth: '300px' }}
+            value={broadcastMsg}
+            onChange={e => setBroadcastMsg(e.target.value)}
+          />
+          <select 
+            className="input-field" 
+            style={{ width: '150px' }}
+            value={broadcastPriority}
+            onChange={e => setBroadcastPriority(e.target.value)}
+          >
+            <option value="info">Info (Blue)</option>
+            <option value="milestone">Milestone (Gold)</option>
+            <option value="system">System (Red Pinned)</option>
+          </select>
+          <button className="btn btn-primary" onClick={dispatchBroadcast}>
+            Dispatch Global Alert
+          </button>
+        </div>
+
+        {broadcastMsg && (
+          <div style={{ marginTop: '1.5rem', padding: '1rem', background: '#0f172a', borderRadius: '8px', borderLeft: `4px solid ${broadcastPriority === 'system' ? '#ef4444' : broadcastPriority === 'milestone' ? '#fbbf24' : '#3b82f6'}` }}>
+            <h4 style={{ color: '#94a3b8', margin: '0 0 0.5rem 0', textTransform: 'uppercase', fontSize: '0.8rem' }}>Preview</h4>
+            <p style={{ margin: 0, fontWeight: 'bold', color: broadcastPriority === 'system' ? '#fff' : '#e2e8f0' }}>{broadcastMsg}</p>
+          </div>
+        )}
       </div>
 
       <div className="glass-panel" style={{ overflow: 'hidden' }}>
