@@ -138,11 +138,11 @@ app.post('/create-checkout-session', async (req, res) => {
           price_data: {
             currency: 'usd',
             product_data: {
-              name: 'Hell Yeah Games - Pro Gamer Plan',
-              description: 'Unlimited access to all premium games, ad-free.',
+              name: 'The Empire Passport',
+              description: 'Unlimited ad-free access and 2x Empire Points across all 9 network sites.',
               images: ['https://gamedistribution.com/images/logo.png'], // Placeholder
             },
-            unit_amount: 999, // $9.99 in cents
+            unit_amount: 499, // $4.99 in cents
             recurring: {
               interval: 'month',
             },
