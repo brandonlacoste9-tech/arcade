@@ -49,7 +49,10 @@ const LeaderboardModal = ({ isOpen, onClose }) => {
     <div className="leaderboard-overlay" onClick={onClose}>
       <div className="leaderboard-modal" onClick={e => e.stopPropagation()}>
         <button className="leaderboard-close" onClick={onClose}>×</button>
-        <h2 className="leaderboard-title">🏆 Empire Leaderboard</h2>
+        <h2 className="leaderboard-title">
+          🏆 Empire Leaderboard
+          <div className="season-indicator">Season 1: 15 Days Remaining</div>
+        </h2>
         <div className="leaderboard-header">
           <span>Rank</span>
           <span>Player</span>
