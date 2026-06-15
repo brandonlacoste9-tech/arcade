@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Gamepad2, Menu, X, Search, User, Globe, Sun, Moon, MessageSquare } from 'lucide-react';
+import { Gamepad2, Menu, X, Search, User, Globe, Sun, Moon, MessageSquare, Trophy } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import { getBranding } from '../config/branding';
+import LeaderboardModal from './LeaderboardModal';
 import './Navbar.css';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLeaderboardOpen, setIsLeaderboardOpen] = useState(false);
   const { user, plan, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
@@ -82,6 +84,9 @@ const Navbar = () => {
           <button className="icon-btn" aria-label="Search">
             <Search size={20} />
           </button>
+          <button className="icon-btn" aria-label="Leaderboard" onClick={() => setIsLeaderboardOpen(true)} style={{ color: '#fbbf24' }}>
+            <Trophy size={20} />
+          </button>
           <button className="icon-btn" aria-label="Toggle Theme" onClick={toggleTheme}>
             {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
           </button>
@@ -138,8 +143,11 @@ const Navbar = () => {
               <option value="pa">ਪੰਜਾਬੀ</option>
             </select>
           </div>
-          <button className="mobile-nav-link" style={{ background: 'transparent', border: 'none', textAlign: 'left', cursor: 'pointer', color: 'inherit' }} onClick={toggleTheme}>
-            {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+          <button className="mobile-nav-link" style={{ background: 'transparent', border: 'none', textAlign: 'left', cursor: 'pointer', color: 'inherit', display: 'flex', alignItems: 'center', gap: '10px' }} onClick={toggleTheme}>
+            {theme === 'dark' ? <><Sun size={18}/> Light Mode</> : <><Moon size={18}/> Dark Mode</>}
+          </button>
+          <button className="mobile-nav-link" style={{ background: 'transparent', border: 'none', textAlign: 'left', cursor: 'pointer', color: '#fbbf24', display: 'flex', alignItems: 'center', gap: '10px' }} onClick={() => { setIsLeaderboardOpen(true); setMobileMenuOpen(false); }}>
+            <Trophy size={18}/> Global Leaderboard
           </button>
           <hr className="menu-divider" />
           {user ? (
@@ -156,6 +164,8 @@ const Navbar = () => {
           )}
         </div>
       )}
+      
+      <LeaderboardModal isOpen={isLeaderboardOpen} onClose={() => setIsLeaderboardOpen(false)} />
     </nav>
   );
 };

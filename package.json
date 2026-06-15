@@ -22,6 +22,7 @@
     "helmet": "^8.2.0",
     "i18next": "^26.3.1",
     "lucide-react": "^1.17.0",
+    "phaser": "^4.1.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-helmet-async": "^3.0.0",
